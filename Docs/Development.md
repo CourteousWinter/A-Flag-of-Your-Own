@@ -29,13 +29,9 @@ To recreate a missing map on Windows, run this from the repository root in Power
     -unattended -nullrhi -nosplash -nosound
 ```
 
-## Proposed first playable milestone
+## Planned first playable milestone
 
-- [ ] Choose the player perspective and add a controllable character.
-- [ ] Add one shipboard interaction and one chore with a clear completion condition.
-- [ ] Track pay and reputation and display the reward.
-- [ ] Save and load the player's earned progress.
-- [ ] Playtest the full chore loop in the packaged Windows build.
+The third-person perspective is confirmed. The current [demo specification](Demo.md) supersedes the original stationary chore prototype: two-four cooperative players, a moving ship, coherent ocean/wind, cleaning, cooking, cargo stowage, personal experience and persistence, followed by Windows packaging and human playtests. [Roadmap](Roadmap.md) and [Backlog](Backlog.md) define the technical prerequisites and dependent tasks. No gameplay implementation is started by this planning update.
 
 The initial flying pawn is a layout inspection tool. No movement, interaction, progression, or saving system should be marked complete based on this scaffold.
 

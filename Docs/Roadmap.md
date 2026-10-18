@@ -1,63 +1,59 @@
-# Roadmap iniziale
+# Roadmap dalla demo alla release
 
-Versione 0.1, 18 ottobre 2026. Questo documento traduce il concept disponibile in un primo percorso di sviluppo. La descrizione dettagliata del gioco deve ancora essere raccolta: le fasi dopo l'MVP sono direzioni da affinare, con contenuti e sistemi da confermare.
+Baseline 0.2, 18 ottobre 2026. **Solo pianificazione: nessun task di gameplay avviato.** Il progetto reale resta il blockout iniziale con pawn di ispezione. [Visione confermata e decisioni aperte](Vision.md).
 
-## Cosa abbiamo capito
+## Percorso incrementale
 
-Il giocatore costruisce una vita in mare: parte da mozzo o marinaio, lavora e vive a bordo, guadagna denaro e reputazione, diventa capitano e può arrivare a possedere una flotta e una villa su un'isola dalla quale dirigere le spedizioni. La quotidianità, la ciurma, i rapporti e i luoghi in cui vivere collegano questa progressione.
+```mermaid
+flowchart LR
+    M0["M0: nave, mare e rete"] --> M1["M1: demo + playtest"]
+    M1 --> M2["M2: carriera e mansioni"]
+    M2 --> M3["M3: capitano e navi"]
+    M3 --> M4["M4: flotta"]
+    M4 --> M5["M5: villa"]
+    M5 --> M6["M6: beta e release"]
+```
 
-La crescita deve rendere visibile il passaggio dal servizio agli altri all'indipendenza: ogni avanzamento introduce decisioni e responsabilità. Tempi, requisiti e regole di sblocco restano da progettare.
+Ogni fase termina con evidenze e una decisione. Un gate fallito resta aperto e blocca l'espansione: si aggiungono correzioni atomiche stimate, si aggiorna il grafo e si riprova. L'ordine delle foglie è dato dalle dipendenze, non dal numero della issue.
 
-**Decisione confermata dall'utente il 18 ottobre 2026: visuale in terza persona per il primo prototipo.** Sensibilità, distanze della camera, animazioni e controlli specifici saranno verificati nel prototipo.
-
-Sono ancora aperti ambientazione e grado di fantasia, ruolo del combattimento e della navigazione, eventuali carriere alternative, ambizioni multiplayer e contenuto del primo lavoro da mozzo. Non considerare questi elementi requisiti approvati.
-
-## M0 - Primo ciclo da mozzo (MVP)
-
-[Milestone GitHub](https://github.com/CourteousWinter/A-Flag-of-Your-Own/milestone/1)
-
-Risultato da provare: su una sola nave ferma, il giocatore si muove in terza persona, accetta un incarico, lo completa, riceve paga e reputazione e ritrova il progresso dopo il riavvio. Un eseguibile Windows permette di provare il ciclo fuori dall'editor.
-
-Questa è la prima ipotesi di esperienza giocabile, da validare con il design dettagliato e i playtest. Le forme del blockout e gli eventuali valori economici sono provvisori. Navigazione, combattimento, flotta, villa, economia estesa e simulazione sociale completa vengono raffinati nelle fasi successive.
-
-| Issue | Risultato | OA iniziali | Confidenza | OH | Dipendenze |
+| Milestone / epic | Risultato verificabile | Foglie | OA | OH iniziali | Uscita |
 | --- | --- | --- | --- | --- | --- |
-| [#4](https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/4) | Roadmap e decisioni esplicite | 1 | Alta | 0 | Nessuna |
-| [#5](https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/5) | Verifica ripetibile in Unreal | 2 | Media | 0 | Nessuna tecnica |
-| [#6](https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/6) | Movimento e camera in terza persona | 4 | Bassa | 0.25 | #5; affinamento controlli |
-| [#7](https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/7) | Interazione con un oggetto | 2 | Media | 0.1 | #6 |
-| [#8](https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/8) | Primo incarico completo | 4 | Bassa | 0.25 | #7; scelta del lavoro |
-| [#9](https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/9) | Paga, reputazione e feedback minimo | 2 | Media | 0.15 | #8 |
-| [#10](https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/10) | Salvataggio e caricamento | 4 | Bassa | 0.1 | #8, #9 |
-| [#11](https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/11) | Packaging e playtest Windows | 2 | Bassa | 0.5 | #6-#10 |
+| [M0 - Fondamenta cooperative e mare](https://github.com/CourteousWinter/A-Flag-of-Your-Own/milestone/1) / [#15](https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/15) | Due-quattro client, nave fisica e ponte percorribile; mare e vento coerenti. Gate tecnico prima della demo. | 15 | 68 | 3.35 | [#34](https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/34) |
+| [M1 - Demo cooperativa: primo imbarco](https://github.com/CourteousWinter/A-Flag-of-Your-Own/milestone/2) / [#16](https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/16) | Viaggio breve con pulizia, cucina e stiva; ruoli iniziali, esperienza personale, salvataggio e playtest del divertimento. | 18 | 70 | 11.25 | [#48](https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/48) |
+| [M2 - Carriera e vita di bordo](https://github.com/CourteousWinter/A-Flag-of-Your-Own/milestone/3) / [#17](https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/17) | Cinque ruoli sbloccabili, nuovi imbarchi e mansioni navali giocabili; verifica della progressione cooperativa. | 14 | 50 | 7.25 | [#62](https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/62) |
+| [M3 - Capitano, equipaggio e nave propria](https://github.com/CourteousWinter/A-Flag-of-Your-Own/milestone/4) / [#18](https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/18) | Comando, equipaggio NPC entro 20 per nave, proprieta e famiglie di navi low poly secondo budget approvato. | 15 | 78 | 11.25 | [#77](https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/77) |
+| [M4 - Flotta e spedizioni](https://github.com/CourteousWinter/A-Flag-of-Your-Own/milestone/5) / [#19](https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/19) | Acquisire piu navi, nominare capitani e dirigere spedizioni con persistenza e passaggio fra simulazione vicina e delegata. | 8 | 36 | 5.5 | [#85](https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/85) |
+| [M5 - Villa sull isola](https://github.com/CourteousWinter/A-Flag-of-Your-Own/milestone/6) / [#20](https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/20) | Residenza raggiungibile, crescita visibile e gestione di flotta e provviste dalla villa. | 8 | 36 | 6.5 | [#93](https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/93) |
+| [M6 - Beta e release 1.0](https://github.com/CourteousWinter/A-Flag-of-Your-Own/milestone/7) / [#21](https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/21) | Integrazione, qualita del mare, accessibilita, prestazioni, regressioni cooperative e candidato distribuibile del perimetro confermato. | 16 | 72 | 26 | [#108](https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/108) + pacchetto [#109](https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/109) |
 
-Stima iniziale del backlog: **21 OA e 1.35 OH**, delle quali 1 OA riguarda la pianificazione. Ogni issue contiene ripartizione e intervallo plausibile. Sono ipotesi, senza misure di velocità precedenti: il totale non è una scadenza e va aggiornato al raffinamento. Le attese non supervisionate e le correzioni scoperte durante i playtest vanno registrate separatamente. [Metodo di stima](Planning.md).
+**Demo provabile e valutata (M0 + M1): 138 OA, 14.6 OH iniziali, 33 foglie.** Comprende fondamenta, tre minigiochi, viaggio, salvataggi, pacchetto Windows e due gruppi di prova. [Scope e criteri](Demo.md), [protocollo umano](PlaytestPlan.md).
 
-Le issue future partono in triage; diventano `ready` con specifiche, responsabilità, dipendenze risolte e verifica definita. Si lavora su una issue alla volta per responsabile. Chiudere un task tecnico non equivale a validare il divertimento della milestone.
+**Intero backlog noto: 410 OA e 71.1 OH iniziali, 94 foglie in 7 epic.** Include la demo. Gli epic non aggiungono ore; la pianificazione #14 (4 OA) e lo storico chiuso sono esclusi. Gli intervalli esplorativi delle foglie sommano 205–820 OA: è sensibilità alle ipotesi, non intervallo statistico, preventivo o calendario. Le fasi lontane hanno confidenza bassa e le quantità di contenuti ancora aperte vanno approvate. Correzioni ignote, nuove richieste e ulteriori cicli di playtest aumenteranno il lavoro tracciato.
 
-### Uscita dall'MVP
+## Decisioni prima delle implementazioni
 
-- Il ciclo completo è riproducibile in una build Windows, con nuovo profilo e riavvio.
-- Le ricompense non si duplicano ripetendo l'interazione o ricaricando lo stato.
-- Il salvataggio assente o illeggibile ha un comportamento gestito e documentato.
-- Il playtest umano chiarisce se obiettivo, azione e ricompensa sono comprensibili e se il lavoro è interessante.
-- Ogni difetto bloccante è risolto; le modifiche di design emerse sono registrate prima di ampliare il gioco.
+- [#22](https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/22) — Spike: architettura cooperativa, identita e connessione privata.
+- [#23](https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/23) — Spike: scegliere stack per onde, galleggiamento e vento.
+- [#24](https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/24) — Definire stile low poly e scheda della nave demo.
+- [#49](https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/49) — Definire requisiti di bordo per i cinque ruoli.
+- [#63](https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/63) — Decidere proprieta, denaro e permessi nel gruppo cooperativo.
+- [#64](https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/64) — Approvare catalogo navale, epoca e budget contenuti.
+- [#78](https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/78) — Definire limiti e regole della flotta cooperativa.
+- [#86](https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/86) — Definire villa, isola e crescita della residenza.
+- [#94](https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/94) — Congelare il perimetro e la matrice contenuti della 1.0.
 
-## Incrementi verso il gioco completo
+Le scelte di proprietà condivisa, catalogo delle navi, numero di unità della flotta, livelli della villa e durata non sono decisioni già approvate. Le issue dipendenti restano in backlog fino all'esito della decisione e al raffinamento. Non vengono aggiunti implicitamente combattimento, PvP, MMO o costruzione libera.
 
-Le fasi descrivono risultati giocabili da esplorare dopo M0; ordine e scope saranno rivisti con la descrizione completa e le evidenze dei test. Le stime di implementazione vengono assegnate alle issue piccole quando il relativo scope è abbastanza chiaro.
+## Condizioni per la release
 
-| Fase proposta | Incremento giocabile | Domanda da validare prima di espandere |
-| --- | --- | --- |
-| M1 - Vita a bordo | Più attività significative e primi rapporti con la ciurma collegati al ciclo quotidiano | Vivere sulla nave resta interessante oltre il primo incarico? |
-| M2 - Viaggi | Un viaggio limitato che collega lavoro, navigazione e ricompensa | Quale ruolo hanno controllo della nave, esplorazione e scelte di rotta? |
-| M3 - Capitano | Gestire una nave propria, ciurma, provviste e decisioni di viaggio | Il comando introduce scelte interessanti e sostenibili da realizzare? |
-| M4 - Flotta | Più navi e capitani con spedizioni coordinate | La delega amplia le decisioni del giocatore senza moltiplicare inutilmente il lavoro ripetitivo? |
-| M5 - Vita sull'isola | Residenza e gestione dalla villa collegate alle attività in mare | Casa e isola rafforzano il senso di crescita e appartenenza? |
-| M6 - Gioco completo | Sistemi collegati, progressione verificata, contenuti e qualità di release | L'esperienza mantiene la promessa iniziale dall'inizio alla gestione della flotta? |
+L'arco di carriera deve funzionare dal nuovo personaggio alla villa: ruoli scelti a ogni imbarco, esperienza personale persistente, navi proprie, equipaggio entro venti NPC sulla nave maggiore, flotta e gestione dall'isola. Lavori operativi giocabili come minigiochi, mare/vento coerenti e cooperativa fino a quattro utenti sono criteri trasversali, non aggiunte finali.
 
-Per ogni fase: specificare un piccolo risultato giocabile, risolvere le incertezze con uno spike da 1-2 OA se necessario, implementare, verificare in build, raccogliere feedback e aggiornare il backlog. Ampliare i contenuti dopo aver verificato il sistema che li sostiene. Performance, leggibilità, salvataggi e qualità del controllo vanno verificati lungo il percorso, secondo il tipo di cambiamento.
+La beta verifica anche ritmo naturale, utilità dei ruoli e ripetitività: profili accelerati di QA non sostituiscono la prova dell'esperienza. Il gate finale richiede zero P0/P1 sul percorso, verifica di salvataggi/rete/prestazioni, audit delle licenze e decisione del responsabile. Il task successivo consegna il pacchetto 1.0 con versione, requisiti e note; una pubblicazione su store richiede destinazione e autorizzazione specifiche.
 
-## Confini da definire con la descrizione completa
+## Storia e gestione del piano
 
-Servono soprattutto il ciclo di una sessione tipica, le azioni del mozzo, il ruolo di relazioni e bisogni, il funzionamento dei viaggi e della navigazione, l'eventuale combattimento, il passaggio al comando, la delega alla flotta e le attività sulla propria isola. Verranno aggiornati visione, milestone e issue interessate; eventuali cambiamenti non rendono definitive le ipotesi di questo documento.
+La baseline 0.1 su nave ferma (21 OA / 1.35 OH) è superata dalle decisioni cooperative e di simulazione. Le issue #6–#11 vengono riutilizzate e conservano la stima iniziale; #4 e #5 rimangono chiuse come storico. Non sommare baseline vecchia e nuova.
+
+Prima di iniziare una foglia: confermare responsabile, scope, stima/intervallo, verifica, prerequisiti e percorsi degli asset. Le foglie lontane e quelle da 8 OA richiedono riesame; dividere se il nuovo scope supera 8 OA. Il piano non avvia implementazioni. [Metodo OA/OH](Planning.md).
+
+[Indice completo delle issue e copertura](Backlog.md) · [Manifest versionato](Backlog.json) · [Ricerca navale e simulazione](Research/Ships.md)

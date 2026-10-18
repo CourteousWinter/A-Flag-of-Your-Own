@@ -45,8 +45,20 @@ Alla chiusura annotare OA effettive (somma del tempo attivo di tutti gli agenti)
 
 Dopo almeno cinque issue simili completate confrontare stima iniziale ed effettivo: `fattore = somma OA effettive / somma OA stimate`. Usarlo sulle nuove stime della stessa area e aggiornare la capacità settimanale osservata. Una capacità di 10 OA/settimana e un backlog di 30 OA suggeriscono circa tre settimane attive, prima di attese e verifiche umane. Non assumere capacità disponibili senza misurarle.
 
-## Prossima milestone
+## Baseline e raffinamento progressivo
 
-La prima milestone resta il breve ciclo da mozzo descritto in [Vision](Vision.md): movimento, incarico, completamento, paga/reputazione e salvataggio. Le decisioni ancora aperte vanno risolte o isolate prima di stimare le relative implementazioni. Questo setup prepara le issue future; non costituisce una stima dell'intero gioco.
+La baseline 0.2 segue la [Vision](Vision.md) aggiornata: cooperativa fino a quattro persone, mare e vento simulati, minigiochi, carriera a ogni imbarco, flotta e villa. La prima prova di prodotto è la [demo](Demo.md), preceduta dal gate tecnico della nave in rete. [Roadmap](Roadmap.md), [indice delle issue](Backlog.md) e [manifest JSON](Backlog.json) descrivono il percorso completo fino alla release.
 
-La [roadmap iniziale](Roadmap.md) collega la milestone MVP alle issue GitHub e alle fasi successive ancora da affinare. La terza persona per il primo prototipo è stata confermata dall'utente il 18 ottobre 2026.
+Le issue sono foglie stimate, raccolte in sette epic. Gli epic riportano somme e checklist; non hanno un'altra stima da sommare. La issue di pianificazione #14 (4 OA stimate), il lavoro storico chiuso e le attese sono esclusi dai totali futuri. Nessuna OA effettiva viene dedotta dalla durata della chat.
+
+L'intervallo di ciascuna foglia iniziale è una sensibilità esplicita da metà al doppio della stima, non un intervallo statistico. La somma degli estremi non è una previsione probabilistica della release. Le fasi lontane hanno confidenza bassa e richiedono raffinamento dopo i gate precedenti; anche le issue da 8 OA richiedono riesame. Prima di `ready`, sostituire gli intervalli generici con evidenze, verificare toolchain, licenze, budget dei contenuti e responsabilità. Se la previsione aggiornata supera 8 OA, dividere la foglia, mantenere la storia e ricalcolare il totale senza contare due volte il contenitore.
+
+OA e OH sono lavoro attivo distinto. OH comprende anche il tempo dei partecipanti ai test, non solo del facilitatore; la disponibilità di persone e di almeno due PC è una dipendenza esterna. I budget OH delle fasi lontane sono iniziali: vanno raffinati con numero di partecipanti, durata e ritmo naturale della progressione.
+
+Non è stanziato un numero inventato di ore per difetti ancora sconosciuti. Ogni difetto o iterazione di design scoperto diventa una issue atomica stimata e una dipendenza del gate; la previsione complessiva cambia. Senza benchmark di produttività, catalogo approvato e risultati degli spike, il totale del backlog non è un preventivo chiuso né una data di consegna.
+
+Tutte le issue di sviluppo rimangono pianificate: la richiesta attuale autorizza soltanto tracciamento e documentazione. `blocked` segnala prerequisiti aperti; `triage` segnala anche scope o decisioni da raffinare. Rimuovere un blocco non autorizza automaticamente l'avvio di un task.
+
+## Storia delle stime
+
+La baseline 0.1 prevedeva un ciclo su nave ferma: 21 OA e 1.35 OH, inclusa la pianificazione iniziale. Non copriva il gioco attuale. Le issue #6–#11 vengono aggiornate conservandone stima originale e motivo della revisione; #4 e #5 restano storico chiuso. La baseline 0.2 non sovrascrive consuntivi e non considera svolto lavoro di gameplay.

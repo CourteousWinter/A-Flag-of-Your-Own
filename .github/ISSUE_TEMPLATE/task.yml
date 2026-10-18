@@ -1,0 +1,55 @@
+name: Task di sviluppo
+description: Un risultato piccolo, verificabile e stimato in ore-agente.
+title: "[Task] "
+labels: ["type:task", "status:triage", "effort:unestimated"]
+body:
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Risultato e scope
+      description: Comportamento atteso, valore per il giocatore e cosa resta escluso.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Criteri di accettazione
+      description: Checklist di risultati osservabili e passi per verificarli.
+      placeholder: "- [ ] ..."
+    validations:
+      required: true
+  - type: dropdown
+    id: effort
+    attributes:
+      label: Stima (OA)
+      description: 1 OA = 1 ora attiva di un agente; oltre 8 OA dividere il lavoro.
+      options: ["Da stimare", "0.5 OA", "1 OA", "2 OA", "4 OA", "8 OA", "Da dividere (>8 OA)"]
+    validations:
+      required: true
+  - type: textarea
+    id: estimate
+    attributes:
+      label: Ripartizione, intervallo e confidenza
+      description: Includere contesto, implementazione, test e integrazione; alta/media/bassa e agente di riferimento.
+      placeholder: "4 OA: 0.5 contesto + 2 sviluppo + 1 test + 0.5 integrazione. Intervallo 3-6 OA; confidenza media."
+    validations:
+      required: true
+  - type: input
+    id: human
+    attributes:
+      label: Verifiche umane (OH)
+      description: Ore umane previste, anche 0; indicare la verifica richiesta.
+    validations:
+      required: true
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dipendenze e asset riservati
+      description: Issue bloccanti, decisioni, strumenti e percorsi binari da assegnare a un solo responsabile. Scrivere nessuna se applicabile.
+    validations:
+      required: true
+  - type: textarea
+    id: delivery
+    attributes:
+      label: Consuntivo e consegna
+      description: Compilare alla chiusura con PR, evidenze, OA/OH effettive e attese. Non inventare ore non misurate.

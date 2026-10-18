@@ -3,7 +3,9 @@ Binaries/
 DerivedDataCache/
 Intermediate/
 Saved/
-Build/
+# Preserve authored packaging resources in Build/; ignore generated metadata.
+Build/**/FileOpenOrder/
+Build/**/*.log
 Plugins/**/Binaries/
 Plugins/**/Intermediate/
 Plugins/**/Saved/

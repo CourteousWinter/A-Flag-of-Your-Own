@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Regole e stime OA
+    url: https://github.com/CourteousWinter/A-Flag-of-Your-Own/blob/main/Docs/Planning.md
+    about: Leggi il metodo prima di preparare una issue pronta per lo sviluppo.

@@ -1,0 +1,32 @@
+name: Repository checks
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: repository-checks-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  repository:
+    name: Repository checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout and fetch LFS assets
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          lfs: true
+          persist-credentials: false
+      - name: Validate repository
+        run: python3 Tools/CI/check_repository.py
+      - name: Verify LFS pointers and objects
+        run: git lfs fsck --pointers --objects HEAD
+      - name: Verify effort automation
+        run: python3 -m unittest discover -s Tools/CI -p 'test_*.py' -v

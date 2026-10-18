@@ -1,6 +1,6 @@
 # A Flag of Your Own
 
-A pirate life sim where you rise from deckhand to captain, manage ships and crews, and command a growing fleet from your own island estate.
+A low-poly cooperative pirate life sim for up to four players: start as a deckhand or cook, learn shipboard roles, become a captain, and command a growing fleet from your island estate. Ocean, wind and cooperative shipboard minigames are central to the design.
 
 ## Project status
 
@@ -39,4 +39,4 @@ Read [the game vision](Docs/Vision.md) for the concept and [development notes](D
 
 Development follows [the contribution guide](CONTRIBUTING.md). Issues are sized in **OA (agent-hours)**: 1 OA is one hour of active agent effort, including implementation and verification. See [planning and estimation](Docs/Planning.md) for issue sizes, uncertainty, human playtesting and actual effort tracking.
 
-The [initial roadmap](Docs/Roadmap.md) links the third-person deckhand MVP to its GitHub issues and outlines the proposed progression toward captain, fleet owner and island estate owner.
+The [roadmap to release](Docs/Roadmap.md) links seven milestones to the [complete issue index](Docs/Backlog.md). The [cooperative demo](Docs/Demo.md) and [human playtest protocol](Docs/PlaytestPlan.md) define how to assess functionality and enjoyment before expanding the game. Personal experience persists, and an eligible role is selected at every new embarkation. The planning baseline does not start development or make unresolved design choices final.

@@ -1,0 +1,2972 @@
+{
+  "schema_version": 1,
+  "version": "0.2",
+  "date": "2026-10-18",
+  "repository": "CourteousWinter/A-Flag-of-Your-Own",
+  "planning_issue": 14,
+  "scope": "Pianificazione soltanto; nessun avvio di sviluppo gameplay.",
+  "externals": {
+    "plan": 14,
+    "smoke": 5
+  },
+  "milestones": [
+    {
+      "key": "M0",
+      "title": "M0 - Fondamenta cooperative e mare",
+      "description": "Due-quattro client, nave fisica e ponte percorribile; mare e vento coerenti. Gate tecnico prima della demo.",
+      "gate": "gate_tech",
+      "milestone_number": 1,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/milestone/1",
+      "epic_issue_number": 15
+    },
+    {
+      "key": "M1",
+      "title": "M1 - Demo cooperativa: primo imbarco",
+      "description": "Viaggio breve con pulizia, cucina e stiva; ruoli iniziali, esperienza personale, salvataggio e playtest del divertimento.",
+      "gate": "demo_decision",
+      "milestone_number": 2,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/milestone/2",
+      "epic_issue_number": 16
+    },
+    {
+      "key": "M2",
+      "title": "M2 - Carriera e vita di bordo",
+      "description": "Cinque ruoli sbloccabili, nuovi imbarchi e mansioni navali giocabili; verifica della progressione cooperativa.",
+      "gate": "career_gate",
+      "milestone_number": 3,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/milestone/3",
+      "epic_issue_number": 17
+    },
+    {
+      "key": "M3",
+      "title": "M3 - Capitano, equipaggio e nave propria",
+      "description": "Comando, equipaggio NPC entro 20 per nave, proprieta e famiglie di navi low poly secondo budget approvato.",
+      "gate": "captain_gate",
+      "milestone_number": 4,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/milestone/4",
+      "epic_issue_number": 18
+    },
+    {
+      "key": "M4",
+      "title": "M4 - Flotta e spedizioni",
+      "description": "Acquisire piu navi, nominare capitani e dirigere spedizioni con persistenza e passaggio fra simulazione vicina e delegata.",
+      "gate": "fleet_gate",
+      "milestone_number": 5,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/milestone/5",
+      "epic_issue_number": 19
+    },
+    {
+      "key": "M5",
+      "title": "M5 - Villa sull isola",
+      "description": "Residenza raggiungibile, crescita visibile e gestione di flotta e provviste dalla villa.",
+      "gate": "estate_gate",
+      "milestone_number": 6,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/milestone/6",
+      "epic_issue_number": 20
+    },
+    {
+      "key": "M6",
+      "title": "M6 - Beta e release 1.0",
+      "description": "Integrazione, qualita del mare, accessibilita, prestazioni, regressioni cooperative e candidato distribuibile del perimetro confermato.",
+      "gate": "release_gate",
+      "exit_task": "release_package",
+      "milestone_number": 7,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/milestone/7",
+      "epic_issue_number": 21
+    }
+  ],
+  "tasks": [
+    {
+      "key": "network_design",
+      "milestone": "M0",
+      "title": "Spike: architettura cooperativa, identita e connessione privata",
+      "estimate_oa": 2,
+      "estimate_range_oa": [
+        1.0,
+        4
+      ],
+      "confidence": "media",
+      "human_hours": 0,
+      "kind": "spike",
+      "needs_product_decision": false,
+      "depends_on": [
+        "plan",
+        "smoke"
+      ],
+      "scope": "Decidere una base host/client per 2-4 giocatori Windows e identita personali; confrontare Blueprint/C++ e toolchain disponibile senza acquistare servizi.",
+      "acceptance": [
+        "ADR con autorita di server, profilo personale e mondo ospitato, diagramma dei dati e limiti espliciti.",
+        "Percorso di ingresso su due PC reali e in rete esterna definito; eventuale backend, costi e dipendenze richiedono decisione esplicita.",
+        "Macchine di riferimento e budget iniziali per frame, simulazione e rete fissati prima dei benchmark."
+      ],
+      "verification": "Prova host/client con 2 e 4 processi, almeno 2 PC per il gate; ritardo di rete e disconnessione secondo Docs/PlaytestPlan.md.",
+      "assets": "Content/AFlagOfYourOwn/Blueprints/, Characters/, UI/ e Config/; eventuale modulo C++ solo dopo lo spike architetturale.",
+      "area": "network",
+      "needs_refinement": false,
+      "issue_number": 22,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/22"
+    },
+    {
+      "key": "ocean_spike",
+      "milestone": "M0",
+      "title": "Spike: scegliere stack per onde, galleggiamento e vento",
+      "estimate_oa": 2,
+      "estimate_range_oa": [
+        1.0,
+        4
+      ],
+      "confidence": "media",
+      "human_hours": 0,
+      "kind": "spike",
+      "needs_product_decision": false,
+      "depends_on": [
+        "plan",
+        "smoke"
+      ],
+      "scope": "Confrontare Water/Gerstner, FFT ed effetti locali in UE 5.8.3; scegliere il percorso minimo che preserva interrogazioni fisiche e superficie coerenti.",
+      "acceptance": [
+        "Matrice di alternative con disponibilita, licenze, query sul server, replica e limiti prestazionali.",
+        "Casi di mare calmo/mosso, forza velica e allineamento grafica/fisica definiti.",
+        "ADR e task di implementazione raffinati; nessuna promessa di qualita superiore ai giochi di riferimento senza prova."
+      ],
+      "verification": "Scenario ripetibile con valori registrati, confronto di stato host/client e profiling sulla macchina di riferimento.",
+      "assets": "Content/AFlagOfYourOwn/Ships/, Environment/, Data/ e Config/; dichiarare mappe e asset binari prima dell editing.",
+      "area": "simulation",
+      "needs_refinement": false,
+      "issue_number": 23,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/23"
+    },
+    {
+      "key": "art_bible",
+      "milestone": "M0",
+      "title": "Definire stile low poly e scheda della nave demo",
+      "estimate_oa": 2,
+      "estimate_range_oa": [
+        1.0,
+        4
+      ],
+      "confidence": "media",
+      "human_hours": 0.5,
+      "kind": "task",
+      "needs_product_decision": true,
+      "depends_on": [
+        "plan"
+      ],
+      "scope": "Fissare scala, palette, silhouette e un unico scafo demo con ponte, cucina e stiva; ispirazione storica distinta da ambientazione definitiva.",
+      "acceptance": [
+        "Scheda con dimensioni utili, percorsi, postazioni e leggibilita in terza persona.",
+        "Riferimenti museali con provenienza e budget di materiali/asset; niente dipendenze artistiche non autorizzate.",
+        "Approvazione dello stile e del budget della nave demo registrata."
+      ],
+      "verification": "Ispezione in Unreal, screenshot in terza persona e controllo collisioni/riferimenti/licenze; build della scena di prova.",
+      "assets": "Content/AFlagOfYourOwn/Environment/, Ships/, Characters/; registrare i percorsi esatti e le licenze prima della presa in carico.",
+      "area": "art",
+      "needs_refinement": false,
+      "issue_number": 24,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/24"
+    },
+    {
+      "key": "net_session",
+      "milestone": "M0",
+      "title": "Ospitare e raggiungere una sessione cooperativa da quattro",
+      "estimate_oa": 4,
+      "estimate_range_oa": [
+        2.0,
+        8
+      ],
+      "confidence": "media",
+      "human_hours": 0.25,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "network_design"
+      ],
+      "scope": "Implementare creazione/ingresso/uscita di una sessione privata con un host e fino a tre client secondo ADR.",
+      "acceptance": [
+        "Due e quattro client vedono la stessa sessione; quinto ingresso rifiutato con messaggio comprensibile.",
+        "Ingresso fallito, versione incompatibile e uscita tornano a uno stato recuperabile.",
+        "Procedura di connessione provata fra due PC e documentata."
+      ],
+      "verification": "Prova host/client con 2 e 4 processi, almeno 2 PC per il gate; ritardo di rete e disconnessione secondo Docs/PlaytestPlan.md.",
+      "assets": "Content/AFlagOfYourOwn/Blueprints/, Characters/, UI/ e Config/; eventuale modulo C++ solo dopo lo spike architetturale.",
+      "area": "network",
+      "needs_refinement": false,
+      "issue_number": 25,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/25"
+    },
+    {
+      "key": "third_person",
+      "milestone": "M0",
+      "title": "Movimento e camera in terza persona replicati",
+      "estimate_oa": 4,
+      "estimate_range_oa": [
+        2.0,
+        8
+      ],
+      "confidence": "media",
+      "human_hours": 0.25,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "net_session",
+        "art_bible"
+      ],
+      "scope": "Sostituire il pawn di ispezione con personaggi controllabili in cooperativa su geometria inizialmente ferma.",
+      "acceptance": [
+        "Ogni client controlla il proprio personaggio; gli altri lo vedono muovere correttamente.",
+        "WASD e mouse, collisioni e camera orbitale con impostazioni regolabili; interfaccia/comandi documentati.",
+        "Blueprint compilati, possesso e rientro verificati con 2 e 4 processi."
+      ],
+      "verification": "Prova host/client con 2 e 4 processi, almeno 2 PC per il gate; ritardo di rete e disconnessione secondo Docs/PlaytestPlan.md.",
+      "assets": "Content/AFlagOfYourOwn/Blueprints/, Characters/, UI/ e Config/; eventuale modulo C++ solo dopo lo spike architetturale.",
+      "area": "network",
+      "needs_refinement": false,
+      "issue_number": 6,
+      "original_estimate_oa": 4,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/6"
+    },
+    {
+      "key": "boat_blockout",
+      "milestone": "M0",
+      "title": "Costruire lo scafo low poly percorribile della demo",
+      "estimate_oa": 4,
+      "estimate_range_oa": [
+        2.0,
+        8
+      ],
+      "confidence": "media",
+      "human_hours": 0.25,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "art_bible"
+      ],
+      "scope": "Creare un solo scafo originale con ponte, cucina e stiva funzionali alle tre mansioni demo.",
+      "acceptance": [
+        "Quattro personaggi possono incrociarsi e raggiungere tutte le postazioni.",
+        "Collisioni semplificate, centro di massa e punti di interazione documentati; nessun riferimento mancante.",
+        "Screenshot e percorso di prova su nave ferma; mappa e scafo riservati prima dell editing."
+      ],
+      "verification": "Ispezione in Unreal, screenshot in terza persona e controllo collisioni/riferimenti/licenze; build della scena di prova.",
+      "assets": "Content/AFlagOfYourOwn/Environment/, Ships/, Characters/; registrare i percorsi esatti e le licenze prima della presa in carico.",
+      "area": "art",
+      "needs_refinement": false,
+      "issue_number": 26,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/26"
+    },
+    {
+      "key": "wind_field",
+      "milestone": "M0",
+      "title": "Vento condiviso e riferimento temporale del mare",
+      "estimate_oa": 4,
+      "estimate_range_oa": [
+        2.0,
+        8
+      ],
+      "confidence": "media",
+      "human_hours": 0,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "ocean_spike",
+        "net_session"
+      ],
+      "scope": "Fornire direzione/intensita del vento, raffiche controllate e tempo di simulazione condivisi fra host e client.",
+      "acceptance": [
+        "Host e client ricostruiscono il medesimo stato di vento nello scenario registrato.",
+        "Cambio di intensita/direzione progressivo e riproducibile; stato iniziale coerente per chi entra dopo.",
+        "Vento locale e mare lungo hanno parametri distinti; dati di gameplay separati dai soli effetti estetici."
+      ],
+      "verification": "Scenario ripetibile con valori registrati, confronto di stato host/client e profiling sulla macchina di riferimento.",
+      "assets": "Content/AFlagOfYourOwn/Ships/, Environment/, Data/ e Config/; dichiarare mappe e asset binari prima dell editing.",
+      "area": "simulation",
+      "needs_refinement": false,
+      "issue_number": 27,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/27"
+    },
+    {
+      "key": "ocean_surface",
+      "milestone": "M0",
+      "title": "Superficie oceanica interrogabile e due stati di mare",
+      "estimate_oa": 8,
+      "estimate_range_oa": [
+        4.0,
+        16
+      ],
+      "confidence": "bassa",
+      "human_hours": 0,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "wind_field"
+      ],
+      "scope": "Implementare il modello scelto per mare calmo e mosso, con altezza/normale consultabili dalla fisica.",
+      "acceptance": [
+        "Superficie vista e superficie interrogata concordano entro la tolleranza fissata nello spike.",
+        "Nessuna discontinuita visibile nel tratto navigabile della demo; stato coerente per client tardivi.",
+        "Costo GPU/CPU misurato sulla macchina di riferimento e regolazioni di qualita documentate."
+      ],
+      "verification": "Scenario ripetibile con valori registrati, confronto di stato host/client e profiling sulla macchina di riferimento.",
+      "assets": "Content/AFlagOfYourOwn/Ships/, Environment/, Data/ e Config/; dichiarare mappe e asset binari prima dell editing.",
+      "area": "simulation",
+      "needs_refinement": true,
+      "issue_number": 28,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/28"
+    },
+    {
+      "key": "buoyancy",
+      "milestone": "M0",
+      "title": "Galleggiamento e resistenza dello scafo",
+      "estimate_oa": 8,
+      "estimate_range_oa": [
+        4.0,
+        16
+      ],
+      "confidence": "bassa",
+      "human_hours": 0,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "ocean_surface",
+        "boat_blockout"
+      ],
+      "scope": "Applicare massa, inerzia, galleggiamento e resistenza all acqua allo scafo demo senza animare artificialmente la sua posizione.",
+      "acceptance": [
+        "Assetto stabile in mare calmo e risposta ripetibile a onde laterali e frontali.",
+        "Variazioni di massa e distribuzione del carico producono effetti coerenti e limitati.",
+        "Nessuna instabilita numerica nel percorso standard; stato autorevole e correzioni di rete misurati."
+      ],
+      "verification": "Scenario ripetibile con valori registrati, confronto di stato host/client e profiling sulla macchina di riferimento.",
+      "assets": "Content/AFlagOfYourOwn/Ships/, Environment/, Data/ e Config/; dichiarare mappe e asset binari prima dell editing.",
+      "area": "simulation",
+      "needs_refinement": true,
+      "issue_number": 29,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/29"
+    },
+    {
+      "key": "sailing_forces",
+      "milestone": "M0",
+      "title": "Forze veliche, timone e navigazione col vento apparente",
+      "estimate_oa": 8,
+      "estimate_range_oa": [
+        4.0,
+        16
+      ],
+      "confidence": "bassa",
+      "human_hours": 0.25,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "buoyancy"
+      ],
+      "scope": "Collegare regolazione delle vele e timone a spinta, deriva e resistenza; curve calibrabili per lo scafo demo.",
+      "acceptance": [
+        "Andature distinte e zona non navigabile direttamente controvento, con limiti specifici del rig scelto.",
+        "Regolazione errata, vela ridotta e raffica cambiano spinta/sbandamento in modo osservabile.",
+        "Percorso con vento laterale, favorevole e bordi provato; host mantiene autorita sulla nave."
+      ],
+      "verification": "Scenario ripetibile con valori registrati, confronto di stato host/client e profiling sulla macchina di riferimento.",
+      "assets": "Content/AFlagOfYourOwn/Ships/, Environment/, Data/ e Config/; dichiarare mappe e asset binari prima dell editing.",
+      "area": "simulation",
+      "needs_refinement": true,
+      "issue_number": 30,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/30"
+    },
+    {
+      "key": "deck_network",
+      "milestone": "M0",
+      "title": "Camminare e interagire sul ponte in movimento in rete",
+      "estimate_oa": 8,
+      "estimate_range_oa": [
+        4.0,
+        16
+      ],
+      "confidence": "bassa",
+      "human_hours": 0.5,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "third_person",
+        "buoyancy"
+      ],
+      "scope": "Integrare movimento del personaggio e base fisica della nave, includendo camera e transizioni fra ponte e scale.",
+      "acceptance": [
+        "Due e quattro personaggi restano sul ponte durante rollio/beccheggio e raggiungono cucina/stiva.",
+        "Nessuna caduta attraverso lo scafo o correzione bloccante nel test con 80 ms RTT e 1% perdita simulata.",
+        "Scendere/risalire dove previsto e interagire mantengono posizione e proprieta coerenti."
+      ],
+      "verification": "Prova host/client con 2 e 4 processi, almeno 2 PC per il gate; ritardo di rete e disconnessione secondo Docs/PlaytestPlan.md.",
+      "assets": "Content/AFlagOfYourOwn/Blueprints/, Characters/, UI/ e Config/; eventuale modulo C++ solo dopo lo spike architetturale.",
+      "area": "network",
+      "needs_refinement": true,
+      "issue_number": 31,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/31"
+    },
+    {
+      "key": "interaction",
+      "milestone": "M0",
+      "title": "Interazioni cooperative con autorita e prenotazione della postazione",
+      "estimate_oa": 4,
+      "estimate_range_oa": [
+        2.0,
+        8
+      ],
+      "confidence": "media",
+      "human_hours": 0.1,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "third_person"
+      ],
+      "scope": "Rendere le interazioni contestuali riutilizzabili, validate dal server e condivise fra giocatori.",
+      "acceptance": [
+        "Distanza, disponibilita e identita validate sul server; richiesta fuori portata rifiutata.",
+        "Due utenti sulla stessa postazione hanno un esito determinato; aiuto possibile solo dove previsto.",
+        "Rilascio, interruzione e disconnessione liberano la postazione senza doppia esecuzione."
+      ],
+      "verification": "Prova host/client con 2 e 4 processi, almeno 2 PC per il gate; ritardo di rete e disconnessione secondo Docs/PlaytestPlan.md.",
+      "assets": "Content/AFlagOfYourOwn/Blueprints/, Characters/, UI/ e Config/; eventuale modulo C++ solo dopo lo spike architetturale.",
+      "area": "network",
+      "needs_refinement": false,
+      "issue_number": 7,
+      "original_estimate_oa": 2,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/7"
+    },
+    {
+      "key": "boat_mask",
+      "milestone": "M0",
+      "title": "Gestire superficie dell acqua e interni dello scafo",
+      "estimate_oa": 4,
+      "estimate_range_oa": [
+        2.0,
+        8
+      ],
+      "confidence": "media",
+      "human_hours": 0.25,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "ocean_surface",
+        "boat_blockout"
+      ],
+      "scope": "Mantenere leggibili ponte e interni evitando la superficie oceanica che attraversa arbitrariamente la cabina/stiva.",
+      "acceptance": [
+        "Interni asciutti nello stato integro durante il percorso standard; visuale esterna coerente.",
+        "Mascheratura funziona con nave inclinata e su tutti i client.",
+        "Verifica in render reale; il solo NullRHI non soddisfa questo controllo."
+      ],
+      "verification": "Ispezione in Unreal, screenshot in terza persona e controllo collisioni/riferimenti/licenze; build della scena di prova.",
+      "assets": "Content/AFlagOfYourOwn/Environment/, Ships/, Characters/; registrare i percorsi esatti e le licenze prima della presa in carico.",
+      "area": "art",
+      "needs_refinement": false,
+      "issue_number": 32,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/32"
+    },
+    {
+      "key": "connection_resilience",
+      "milestone": "M0",
+      "title": "Gestire abbandono, riconnessione e perdita dell host",
+      "estimate_oa": 4,
+      "estimate_range_oa": [
+        2.0,
+        8
+      ],
+      "confidence": "media",
+      "human_hours": 0,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "interaction"
+      ],
+      "scope": "Definire e implementare stati recuperabili per la cooperativa privata; host migration solo se scelta esplicitamente nell ADR.",
+      "acceptance": [
+        "Client disconnesso non mantiene lock o oggetti prenotati.",
+        "Riconnessione gestita con identita coerente e messaggi comprensibili.",
+        "Perdita host porta a esito esplicito; nessuna promessa di conservazione non implementata."
+      ],
+      "verification": "Prova host/client con 2 e 4 processi, almeno 2 PC per il gate; ritardo di rete e disconnessione secondo Docs/PlaytestPlan.md.",
+      "assets": "Content/AFlagOfYourOwn/Blueprints/, Characters/, UI/ e Config/; eventuale modulo C++ solo dopo lo spike architetturale.",
+      "area": "network",
+      "needs_refinement": false,
+      "issue_number": 33,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/33"
+    },
+    {
+      "key": "gate_tech",
+      "milestone": "M0",
+      "title": "Gate tecnico: nave e personaggi cooperativi verificati",
+      "estimate_oa": 2,
+      "estimate_range_oa": [
+        1.0,
+        4
+      ],
+      "confidence": "media",
+      "human_hours": 1,
+      "kind": "gate",
+      "needs_product_decision": false,
+      "depends_on": [
+        "sailing_forces",
+        "deck_network",
+        "boat_mask",
+        "connection_resilience"
+      ],
+      "scope": "Verificare la base su cui costruire la demo con una scena ripetibile e risultati misurati.",
+      "acceptance": [
+        "Build/scena di prova con 2 e 4 processi, almeno due PC reali e scenario di latenza completati.",
+        "Mappa, vento, nave e personaggi coerenti; nessun difetto P0/P1 aperto nel percorso.",
+        "Report con commit, hardware, frame time e rete; difetti reali diventano issue atomiche bloccanti."
+      ],
+      "verification": "Eseguire i comandi documentati, verificare exit code, versione/commit e risultati su installazione pulita.",
+      "assets": "Tools/, Config/ e Docs/Playtests/; output di build e log esclusi da Git.",
+      "area": "tooling",
+      "needs_refinement": false,
+      "issue_number": 34,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/34"
+    },
+    {
+      "key": "demo_role",
+      "milestone": "M1",
+      "title": "Nuovo personaggio e imbarco iniziale come mozzo o cuoco",
+      "estimate_oa": 2,
+      "estimate_range_oa": [
+        1.0,
+        4
+      ],
+      "confidence": "media",
+      "human_hours": 0.25,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "gate_tech"
+      ],
+      "scope": "Creare identita personale e scelta iniziale mozzo/cuoco nella stessa sessione; le altre professioni sono visibili come future.",
+      "acceptance": [
+        "Nuovo profilo ha esperienza zero e puo scegliere entrambi i ruoli iniziali.",
+        "Giocatori con ruoli uguali o differenti possono cooperare senza restare esclusi dal viaggio.",
+        "Imbarco e ruolo sono assegnati dal server e visibili agli altri."
+      ],
+      "verification": "Compilare Blueprint interessati, provare casi normali/errore in Play e in cooperativa, allegare evidenze e verificare Repository checks.",
+      "assets": "Content/AFlagOfYourOwn/Blueprints/, Data/ e UI/; percorsi esatti da dichiarare prima della presa in carico.",
+      "area": "gameplay",
+      "needs_refinement": false,
+      "issue_number": 35,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/35"
+    },
+    {
+      "key": "carry",
+      "milestone": "M1",
+      "title": "Trasportare e posare oggetti sulla nave in cooperativa",
+      "estimate_oa": 4,
+      "estimate_range_oa": [
+        2.0,
+        8
+      ],
+      "confidence": "media",
+      "human_hours": 0.1,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "gate_tech"
+      ],
+      "scope": "Fornire trasporto di ingredienti e casse con proprieta, posa e aggancio sicuri sulla base in movimento.",
+      "acceptance": [
+        "Un oggetto non puo essere duplicato o posseduto da due giocatori.",
+        "Posa, recupero e caduta previsti mantengono stato coerente fra client.",
+        "Interruzione/disconnessione rilascia o ripone l oggetto secondo regola documentata."
+      ],
+      "verification": "Prova host/client con 2 e 4 processi, almeno 2 PC per il gate; ritardo di rete e disconnessione secondo Docs/PlaytestPlan.md.",
+      "assets": "Content/AFlagOfYourOwn/Blueprints/, Characters/, UI/ e Config/; eventuale modulo C++ solo dopo lo spike architetturale.",
+      "area": "network",
+      "needs_refinement": false,
+      "issue_number": 36,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/36"
+    },
+    {
+      "key": "minigame_core",
+      "milestone": "M1",
+      "title": "Framework delle mansioni con progresso e aiuto condiviso",
+      "estimate_oa": 4,
+      "estimate_range_oa": [
+        2.0,
+        8
+      ],
+      "confidence": "media",
+      "human_hours": 0,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "gate_tech"
+      ],
+      "scope": "Definire avvio, input, risultato, interruzione e contributi delle mansioni senza fermare la navigazione.",
+      "acceptance": [
+        "Server valida azioni e completamento; le ricompense hanno un identificatore unico.",
+        "Mansione riprendibile dopo interruzione; supporto cooperativo e conflitti espliciti.",
+        "Input accessibili e feedback visivo; nessun obbligo di pressione frenetica ripetuta."
+      ],
+      "verification": "Compilare Blueprint interessati, provare casi normali/errore in Play e in cooperativa, allegare evidenze e verificare Repository checks.",
+      "assets": "Content/AFlagOfYourOwn/Blueprints/, Data/ e UI/; percorsi esatti da dichiarare prima della presa in carico.",
+      "area": "gameplay",
+      "needs_refinement": false,
+      "issue_number": 37,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/37"
+    },
+    {
+      "key": "cleaning",
+      "milestone": "M1",
+      "title": "Minigioco di pulizia del ponte e della cucina",
+      "estimate_oa": 4,
+      "estimate_range_oa": [
+        2.0,
+        8
+      ],
+      "confidence": "media",
+      "human_hours": 0.25,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "minigame_core"
+      ],
+      "scope": "Implementare pulizia con gesto controllabile e sporco visibilmente rimosso, su un numero finito di zone della demo.",
+      "acceptance": [
+        "Azione e attrezzo influenzano il progresso; risultato visibile a tutti.",
+        "Due giocatori possono collaborare sulle zone senza doppio completamento.",
+        "Qualita/durata registrate; la frequenza di sporco e regolabile per evitare manutenzione continua."
+      ],
+      "verification": "Compilare Blueprint interessati, provare casi normali/errore in Play e in cooperativa, allegare evidenze e verificare Repository checks.",
+      "assets": "Content/AFlagOfYourOwn/Blueprints/, Data/ e UI/; percorsi esatti da dichiarare prima della presa in carico.",
+      "area": "gameplay",
+      "needs_refinement": false,
+      "issue_number": 8,
+      "original_estimate_oa": 4,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/8"
+    },
+    {
+      "key": "cooking",
+      "milestone": "M1",
+      "title": "Minigioco di cucina con preparazione e cottura",
+      "estimate_oa": 4,
+      "estimate_range_oa": [
+        2.0,
+        8
+      ],
+      "confidence": "media",
+      "human_hours": 0.25,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "minigame_core",
+        "carry"
+      ],
+      "scope": "Realizzare una ricetta breve con due ingredienti, preparazione e gestione della cottura; valori e ricetta sono provvisori.",
+      "acceptance": [
+        "Ingredienti realmente consumati e porzioni prodotte una sola volta dal server.",
+        "Tempismo/controllo della cottura determina un risultato leggibile.",
+        "Assistenza, interruzione e ricetta incompleta gestite senza blocchi."
+      ],
+      "verification": "Compilare Blueprint interessati, provare casi normali/errore in Play e in cooperativa, allegare evidenze e verificare Repository checks.",
+      "assets": "Content/AFlagOfYourOwn/Blueprints/, Data/ e UI/; percorsi esatti da dichiarare prima della presa in carico.",
+      "area": "gameplay",
+      "needs_refinement": false,
+      "issue_number": 38,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/38"
+    },
+    {
+      "key": "stow",
+      "milestone": "M1",
+      "title": "Minigioco di ordine e fissaggio della stiva",
+      "estimate_oa": 4,
+      "estimate_range_oa": [
+        2.0,
+        8
+      ],
+      "confidence": "media",
+      "human_hours": 0.25,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "minigame_core",
+        "carry"
+      ],
+      "scope": "Organizzare un piccolo carico in posizioni leggibili e fissarlo prima del viaggio, con massa applicata alla nave.",
+      "acceptance": [
+        "Casse posate e fissate rispettano spazio e stato univoco, accessibili a tutti.",
+        "Distribuzione del carico modifica massa/assetto secondo il modello; il feedback spiega l effetto.",
+        "Casse non fissate e azioni ripetute hanno comportamento riproducibile, senza duplicazioni."
+      ],
+      "verification": "Compilare Blueprint interessati, provare casi normali/errore in Play e in cooperativa, allegare evidenze e verificare Repository checks.",
+      "assets": "Content/AFlagOfYourOwn/Blueprints/, Data/ e UI/; percorsi esatti da dichiarare prima della presa in carico.",
+      "area": "gameplay",
+      "needs_refinement": false,
+      "issue_number": 39,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/39"
+    },
+    {
+      "key": "demo_npc",
+      "milestone": "M1",
+      "title": "Capitano NPC e aiutanti essenziali per il viaggio demo",
+      "estimate_oa": 4,
+      "estimate_range_oa": [
+        2.0,
+        8
+      ],
+      "confidence": "media",
+      "human_hours": 0,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "gate_tech"
+      ],
+      "scope": "Fornire un capitano NPC su rotta di prova e al massimo tre aiutanti con mansioni limitate; non rappresenta ancora la ciurma completa.",
+      "acceptance": [
+        "La nave percorre l itinerario con i giocatori nei ruoli iniziali.",
+        "NPC danno indicazioni e svolgono compiti espliciti senza bloccare le postazioni dei giocatori.",
+        "Numero limitato e comportamento su stazioni verificati su host/client."
+      ],
+      "verification": "Compilare Blueprint interessati, provare casi normali/errore in Play e in cooperativa, allegare evidenze e verificare Repository checks.",
+      "assets": "Content/AFlagOfYourOwn/Blueprints/, Data/ e UI/; percorsi esatti da dichiarare prima della presa in carico.",
+      "area": "gameplay",
+      "needs_refinement": false,
+      "issue_number": 40,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/40"
+    },
+    {
+      "key": "voyage",
+      "milestone": "M1",
+      "title": "Viaggio demo con preparazione, traversata ed evento di mare",
+      "estimate_oa": 4,
+      "estimate_range_oa": [
+        2.0,
+        8
+      ],
+      "confidence": "media",
+      "human_hours": 0.25,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "demo_npc",
+        "cleaning",
+        "cooking",
+        "stow"
+      ],
+      "scope": "Comporre una sessione obiettivo di 20-30 minuti: imbarco, preparazione, traversata, evento moderato e rientro/consegna.",
+      "acceptance": [
+        "Obiettivi e transizioni sono condivisi; ogni ruolo iniziale ha attivita utile.",
+        "Una variazione controllata di vento/mare richiede comunicazione e riallocazione del lavoro.",
+        "Esito e ritorno sono raggiungibili, ripetibili e registrati; nessuna scena tecnica spacciata per demo completa."
+      ],
+      "verification": "Compilare Blueprint interessati, provare casi normali/errore in Play e in cooperativa, allegare evidenze e verificare Repository checks.",
+      "assets": "Content/AFlagOfYourOwn/Blueprints/, Data/ e UI/; percorsi esatti da dichiarare prima della presa in carico.",
+      "area": "gameplay",
+      "needs_refinement": false,
+      "issue_number": 41,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/41"
+    },
+    {
+      "key": "reward",
+      "milestone": "M1",
+      "title": "Ricompense ed esperienza personale del viaggio cooperativo",
+      "estimate_oa": 4,
+      "estimate_range_oa": [
+        2.0,
+        8
+      ],
+      "confidence": "media",
+      "human_hours": 0.15,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "demo_role",
+        "voyage"
+      ],
+      "scope": "Accreditare paga/reputazione/esperienza personale secondo contributi e viaggio; regole semplici e modificabili.",
+      "acceptance": [
+        "Completamenti e viaggio hanno chiavi uniche; richieste ripetute e riconnessioni non duplicano premi.",
+        "Ogni giocatore riceve un riepilogo personale comprensibile.",
+        "Regole distinguono partecipazione utile e tempo inattivo senza trasformare la cooperativa in competizione obbligatoria."
+      ],
+      "verification": "Compilare Blueprint interessati, provare casi normali/errore in Play e in cooperativa, allegare evidenze e verificare Repository checks.",
+      "assets": "Content/AFlagOfYourOwn/Blueprints/, Data/ e UI/; percorsi esatti da dichiarare prima della presa in carico.",
+      "area": "gameplay",
+      "needs_refinement": false,
+      "issue_number": 9,
+      "original_estimate_oa": 2,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/9"
+    },
+    {
+      "key": "hud",
+      "milestone": "M1",
+      "title": "Feedback demo per obiettivi, ruolo, vento e lavoro condiviso",
+      "estimate_oa": 4,
+      "estimate_range_oa": [
+        2.0,
+        8
+      ],
+      "confidence": "media",
+      "human_hours": 0.25,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "reward"
+      ],
+      "scope": "Mostrare informazioni essenziali leggibili nella grafica low poly senza coprire il lavoro sul ponte.",
+      "acceptance": [
+        "Obiettivo corrente, stato della mansione, ruolo e risultato visibili.",
+        "Vento/vele hanno feedback utile per capire perche la nave reagisce.",
+        "Schermate testate a risoluzioni della baseline e da quattro utenti con stato distinto."
+      ],
+      "verification": "Compilare Blueprint interessati, provare casi normali/errore in Play e in cooperativa, allegare evidenze e verificare Repository checks.",
+      "assets": "Content/AFlagOfYourOwn/UI/ e Data/; riservare i Widget Blueprint interessati.",
+      "area": "ui",
+      "needs_refinement": false,
+      "issue_number": 42,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/42"
+    },
+    {
+      "key": "save",
+      "milestone": "M1",
+      "title": "Salvare mondo demo e profili personali cooperativi",
+      "estimate_oa": 8,
+      "estimate_range_oa": [
+        4.0,
+        16
+      ],
+      "confidence": "bassa",
+      "human_hours": 0.25,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "reward"
+      ],
+      "scope": "Persistenza versionata di profili, imbarco, viaggio e stato del mondo secondo ADR; separare esperienza personale e sessione ospitata.",
+      "acceptance": [
+        "Nuovo profilo, riavvio e riconnessione ripristinano l identita e gli stati previsti.",
+        "Dati assenti/corrotti/versione non supportata hanno un esito dichiarato e recuperabile.",
+        "Premi gia applicati e oggetti consumati non vengono duplicati dopo caricamento."
+      ],
+      "verification": "Nuovo profilo, salvataggio, riavvio, riconnessione, dati assenti/corrotti e ricompensa ripetuta: verificare stato coerente e nessun duplicato.",
+      "assets": "Content/AFlagOfYourOwn/Blueprints/, Data/; dati runtime solo in Saved/ ignorato.",
+      "area": "save",
+      "needs_refinement": true,
+      "issue_number": 10,
+      "original_estimate_oa": 4,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/10"
+    },
+    {
+      "key": "onboarding",
+      "milestone": "M1",
+      "title": "Introduzione giocabile a mozzo, cuoco e collaborazione",
+      "estimate_oa": 4,
+      "estimate_range_oa": [
+        2.0,
+        8
+      ],
+      "confidence": "media",
+      "human_hours": 0.5,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "hud"
+      ],
+      "scope": "Guidare il primo viaggio attraverso azioni nel mondo e segnali contestuali, con aiuti disattivabili.",
+      "acceptance": [
+        "Nuovo giocatore trova ruolo, postazione e primo obiettivo senza guida esterna continua.",
+        "Istruzioni presentano gesto e conseguenza delle tre mansioni.",
+        "Giocatori tardivi ricevono contesto coerente con lo stato del viaggio."
+      ],
+      "verification": "Compilare Blueprint interessati, provare casi normali/errore in Play e in cooperativa, allegare evidenze e verificare Repository checks.",
+      "assets": "Content/AFlagOfYourOwn/UI/ e Data/; riservare i Widget Blueprint interessati.",
+      "area": "ui",
+      "needs_refinement": false,
+      "issue_number": 43,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/43"
+    },
+    {
+      "key": "audio_feedback",
+      "milestone": "M1",
+      "title": "Audio e feedback essenziali di nave, vento e mansioni",
+      "estimate_oa": 4,
+      "estimate_range_oa": [
+        2.0,
+        8
+      ],
+      "confidence": "media",
+      "human_hours": 0.25,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "cleaning",
+        "cooking",
+        "stow"
+      ],
+      "scope": "Aggiungere segnali per vento/vele, interazioni e risultati delle tre mansioni, con fonti e licenze tracciate.",
+      "acceptance": [
+        "Eventi locali/remoti udibili nelle posizioni corrette senza ripetizioni di rete.",
+        "Segnali importanti hanno equivalente visivo e volume regolabile.",
+        "Origine dei file verificata per il repository pubblico e la build."
+      ],
+      "verification": "Ascolto di eventi locali/remoti con volume regolabile, controllo origine/licenze e prova in build.",
+      "assets": "Content/AFlagOfYourOwn/Audio/; origine/licenza di ogni risorsa registrata.",
+      "area": "audio",
+      "needs_refinement": false,
+      "issue_number": 44,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/44"
+    },
+    {
+      "key": "build_demo",
+      "milestone": "M1",
+      "title": "Pacchetto Windows della demo cooperativa",
+      "estimate_oa": 4,
+      "estimate_range_oa": [
+        2.0,
+        8
+      ],
+      "confidence": "media",
+      "human_hours": 0.5,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "save",
+        "onboarding",
+        "audio_feedback"
+      ],
+      "scope": "Produrre una build Windows Development redistribuibile nel gruppo di prova, con istruzioni di host/ingresso e dati puliti.",
+      "acceptance": [
+        "Eseguibile parte fuori dall editor su almeno due PC e riporta versione/commit.",
+        "Percorso completo e salvataggi funzionano nella build; nessun contenuto necessario mancante.",
+        "Istruzioni e problemi noti accompagnano il pacchetto; nessuna pubblicazione pubblica automatica."
+      ],
+      "verification": "Eseguire i comandi documentati, verificare exit code, versione/commit e risultati su installazione pulita.",
+      "assets": "Tools/, Config/ e Docs/Playtests/; output di build e log esclusi da Git.",
+      "area": "tooling",
+      "needs_refinement": false,
+      "issue_number": 11,
+      "original_estimate_oa": 2,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/11"
+    },
+    {
+      "key": "demo_network_qa",
+      "milestone": "M1",
+      "title": "Verificare la demo con due e quattro client reali",
+      "estimate_oa": 4,
+      "estimate_range_oa": [
+        2.0,
+        8
+      ],
+      "confidence": "media",
+      "human_hours": 1,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "build_demo"
+      ],
+      "scope": "Eseguire regressione cooperativa del viaggio e delle tre mansioni nella build, inclusi ritardo, perdita e riconnessione.",
+      "acceptance": [
+        "Due e quattro processi su almeno due PC completano il percorso; prova su rete esterna secondo ADR.",
+        "80 ms RTT e 1% perdita simulata non producono blocchi, ricompense duplicate o perdita di oggetti.",
+        "Log e difetti con passi/commit; P0/P1 impediscono il passaggio del gate."
+      ],
+      "verification": "Prova host/client con 2 e 4 processi, almeno 2 PC per il gate; ritardo di rete e disconnessione secondo Docs/PlaytestPlan.md.",
+      "assets": "Content/AFlagOfYourOwn/Blueprints/, Characters/, UI/ e Config/; eventuale modulo C++ solo dopo lo spike architetturale.",
+      "area": "network",
+      "needs_refinement": false,
+      "issue_number": 45,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/45"
+    },
+    {
+      "key": "demo_perf",
+      "milestone": "M1",
+      "title": "Misurare prestazioni e comfort della demo",
+      "estimate_oa": 4,
+      "estimate_range_oa": [
+        2.0,
+        8
+      ],
+      "confidence": "media",
+      "human_hours": 0.5,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "build_demo"
+      ],
+      "scope": "Misurare frame time, host, rete e comfort della camera sulla baseline fissata, con qualita regolabile.",
+      "acceptance": [
+        "Scena di mare mosso con quattro client misurata: mediane e picchi documentati.",
+        "Confronto col target provvisorio di 60 fps a 1080p sulla macchina concordata; scostamenti richiedono decisione esplicita.",
+        "Opzioni per camera/volume e difetti di leggibilita verificati senza confondere low poly e costo fisico."
+      ],
+      "verification": "Eseguire i comandi documentati, verificare exit code, versione/commit e risultati su installazione pulita.",
+      "assets": "Tools/, Config/ e Docs/Playtests/; output di build e log esclusi da Git.",
+      "area": "tooling",
+      "needs_refinement": false,
+      "issue_number": 46,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/46"
+    },
+    {
+      "key": "playtest_demo",
+      "milestone": "M1",
+      "title": "Playtest osservato: utilita, comprensione e divertimento",
+      "estimate_oa": 2,
+      "estimate_range_oa": [
+        1.0,
+        4
+      ],
+      "confidence": "media",
+      "human_hours": 6,
+      "kind": "gate",
+      "needs_product_decision": false,
+      "depends_on": [
+        "demo_network_qa",
+        "demo_perf"
+      ],
+      "scope": "Condurre due sessioni con gruppi distinti (uno da due e uno da tre/quattro), usando Docs/PlaytestPlan.md.",
+      "acceptance": [
+        "Partecipanti reali e consenso documentato; nessuna valutazione del divertimento dedotta dai test automatici.",
+        "Osservazioni su apprendimento, tempi morti, cooperazione e ripetitivita, piu risposte individuali.",
+        "Dati grezzi anonimizzati, sintesi e problemi prioritizzati; segnali di riuscita/fallimento confrontati con i criteri predefiniti."
+      ],
+      "verification": "Revisione di specifica, esempi, esclusioni e decisioni; approvazione del responsabile per le ipotesi di prodotto.",
+      "assets": "Docs/ e dati di specifica; nessun asset da modificare prima della decisione.",
+      "area": "design",
+      "needs_refinement": false,
+      "issue_number": 47,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/47"
+    },
+    {
+      "key": "demo_decision",
+      "milestone": "M1",
+      "title": "Gate demo: continuare, iterare o rivedere il ciclo",
+      "estimate_oa": 2,
+      "estimate_range_oa": [
+        1.0,
+        4
+      ],
+      "confidence": "media",
+      "human_hours": 0.5,
+      "kind": "gate",
+      "needs_product_decision": true,
+      "depends_on": [
+        "playtest_demo"
+      ],
+      "scope": "Prendere una decisione esplicita sulla demo a partire da funzionamento e feedback, mantenendo il backlog successivo bloccato finche non approvato.",
+      "acceptance": [
+        "Decisione del responsabile con evidenze e criteri di Docs/Demo.md.",
+        "Se fallisce: issue correttive <=8 OA con dipendenze, nuovi test e riesame; il gate resta aperto.",
+        "Se passa: perimetro e priorita della fase carriera confermati, senza dichiarare validato tutto il gioco."
+      ],
+      "verification": "Revisione di specifica, esempi, esclusioni e decisioni; approvazione del responsabile per le ipotesi di prodotto.",
+      "assets": "Docs/ e dati di specifica; nessun asset da modificare prima della decisione.",
+      "area": "design",
+      "needs_refinement": false,
+      "issue_number": 48,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/48"
+    },
+    {
+      "key": "career_design",
+      "milestone": "M2",
+      "title": "Definire requisiti di bordo per i cinque ruoli",
+      "estimate_oa": 2,
+      "estimate_range_oa": [
+        1.0,
+        4
+      ],
+      "confidence": "bassa",
+      "human_hours": 0.5,
+      "kind": "task",
+      "needs_product_decision": true,
+      "depends_on": [
+        "demo_decision"
+      ],
+      "scope": "Definire soglie e prove di competenza per mozzo, cuoco, marinaio, capomastro e capitano; incarico scelto a ogni imbarco.",
+      "acceptance": [
+        "Mozzo/cuoco disponibili all inizio; altri ruoli richiedono esperienza personale accumulata.",
+        "Capomastro ha responsabilita di gioco definite e cuoco una specializzazione valorizzata.",
+        "Tempi di crescita e regole per amici con esperienza diversa approvati prima dell implementazione."
+      ],
+      "verification": "Revisione di specifica, esempi, esclusioni e decisioni; approvazione del responsabile per le ipotesi di prodotto.",
+      "assets": "Docs/ e dati di specifica; nessun asset da modificare prima della decisione.",
+      "area": "design",
+      "needs_refinement": true,
+      "issue_number": 49,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/49"
+    },
+    {
+      "key": "character_profile",
+      "milestone": "M2",
+      "title": "Profilo di carriera indipendente dalla nave",
+      "estimate_oa": 4,
+      "estimate_range_oa": [
+        2.0,
+        8
+      ],
+      "confidence": "bassa",
+      "human_hours": 0,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "career_design"
+      ],
+      "scope": "Persistenza di esperienza, qualifiche e storico essenziale del personaggio durante cambi di nave e sessione secondo policy concordata.",
+      "acceptance": [
+        "Identita stabile, esperienza conservata cambiando imbarco e ruolo.",
+        "Profilo distinto da proprieta/risorse del mondo; migrazione e backup iniziali documentati.",
+        "Test con due utenti e progressi differenti, riavvio e riconnessione."
+      ],
+      "verification": "Nuovo profilo, salvataggio, riavvio, riconnessione, dati assenti/corrotti e ricompensa ripetuta: verificare stato coerente e nessun duplicato.",
+      "assets": "Content/AFlagOfYourOwn/Blueprints/, Data/; dati runtime solo in Saved/ ignorato.",
+      "area": "save",
+      "needs_refinement": true,
+      "issue_number": 50,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/50"
+    },
+    {
+      "key": "xp_rules",
+      "milestone": "M2",
+      "title": "Esperienza da mansioni, viaggi e collaborazione",
+      "estimate_oa": 4,
+      "estimate_range_oa": [
+        2.0,
+        8
+      ],
+      "confidence": "bassa",
+      "human_hours": 0.25,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "career_design"
+      ],
+      "scope": "Estendere le regole XP per premiare apprendimento, completamento e aiuto secondo la specifica, con parametri di bilanciamento.",
+      "acceptance": [
+        "Azioni ripetute/inattivita non consentono progressione gratuita fuori dalle regole.",
+        "Contributi e premi sono leggibili e non duplicati dal server.",
+        "Percorsi mozzo/cuoco confrontati su durata, utilita e opportunita di crescita."
+      ],
+      "verification": "Compilare Blueprint interessati, provare casi normali/errore in Play e in cooperativa, allegare evidenze e verificare Repository checks.",
+      "assets": "Content/AFlagOfYourOwn/Blueprints/, Data/ e UI/; percorsi esatti da dichiarare prima della presa in carico.",
+      "area": "gameplay",
+      "needs_refinement": true,
+      "issue_number": 51,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/51"
+    },
+    {
+      "key": "role_unlocks",
+      "milestone": "M2",
+      "title": "Sbloccare marinaio, capomastro e capitano",
+      "estimate_oa": 4,
+      "estimate_range_oa": [
+        2.0,
+        8
+      ],
+      "confidence": "bassa",
+      "human_hours": 0,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "character_profile",
+        "xp_rules"
+      ],
+      "scope": "Applicare requisiti configurabili ai cinque ruoli mantenendo disponibili gli incarichi gia ottenuti.",
+      "acceptance": [
+        "Soglie esatte e appena sotto/sopra verificate sul server.",
+        "Un ruolo avanzato sbloccato non forza la scelta al nuovo imbarco.",
+        "Feedback indica requisiti mancanti e progresso, senza perdita delle competenze precedenti."
+      ],
+      "verification": "Compilare Blueprint interessati, provare casi normali/errore in Play e in cooperativa, allegare evidenze e verificare Repository checks.",
+      "assets": "Content/AFlagOfYourOwn/Blueprints/, Data/ e UI/; percorsi esatti da dichiarare prima della presa in carico.",
+      "area": "gameplay",
+      "needs_refinement": true,
+      "issue_number": 52,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/52"
+    },
+    {
+      "key": "embark_ui",
+      "milestone": "M2",
+      "title": "Nuovo imbarco e scelta del ruolo consentito",
+      "estimate_oa": 4,
+      "estimate_range_oa": [
+        2.0,
+        8
+      ],
+      "confidence": "bassa",
+      "human_hours": 0.25,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "role_unlocks"
+      ],
+      "scope": "Offrire scelta del ruolo per ogni nuovo imbarco con condizioni del contratto e disponibilita chiare.",
+      "acceptance": [
+        "Novizi ed esperti possono imbarcarsi insieme; richieste non autorizzate rifiutate.",
+        "Cambio di nave/ruolo mantiene profilo e avvia solo le responsabilita dell incarico attuale.",
+        "Ruoli occupati e conflitti risolti secondo regola approvata."
+      ],
+      "verification": "Compilare Blueprint interessati, provare casi normali/errore in Play e in cooperativa, allegare evidenze e verificare Repository checks.",
+      "assets": "Content/AFlagOfYourOwn/UI/ e Data/; riservare i Widget Blueprint interessati.",
+      "area": "ui",
+      "needs_refinement": true,
+      "issue_number": 53,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/53"
+    },
+    {
+      "key": "minigame_sails",
+      "milestone": "M2",
+      "title": "Minigioco cooperativo di regolazione e riduzione vele",
+      "estimate_oa": 4,
+      "estimate_range_oa": [
+        2.0,
+        8
+      ],
+      "confidence": "bassa",
+      "human_hours": 0.25,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "demo_decision"
+      ],
+      "scope": "Tradurre le manovre del rig scelto in gesti che regolano apertura/tensione e riducono la superficie velica.",
+      "acceptance": [
+        "Esito influisce realmente sulle forze veliche e si vede nella tela.",
+        "Virata e raffica danno ragioni leggibili per coordinarsi.",
+        "Interruzione e intervento di un compagno preservano stato e proprieta."
+      ],
+      "verification": "Compilare Blueprint interessati, provare casi normali/errore in Play e in cooperativa, allegare evidenze e verificare Repository checks.",
+      "assets": "Content/AFlagOfYourOwn/Blueprints/, Data/ e UI/; percorsi esatti da dichiarare prima della presa in carico.",
+      "area": "gameplay",
+      "needs_refinement": true,
+      "issue_number": 54,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/54"
+    },
+    {
+      "key": "minigame_anchor",
+      "milestone": "M2",
+      "title": "Minigioco di argano, ancoraggio e disormeggio",
+      "estimate_oa": 4,
+      "estimate_range_oa": [
+        2.0,
+        8
+      ],
+      "confidence": "bassa",
+      "human_hours": 0.25,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "demo_decision"
+      ],
+      "scope": "Realizzare manovra dell ancora come lavoro condiviso collegato al comportamento della nave.",
+      "acceptance": [
+        "Ancora filata/salpata e stato della nave concordano fra client.",
+        "Due persone possono aiutarsi secondo una regola misurabile.",
+        "Manovre fuori condizione non generano teletrasporti, blocchi o duplicazioni."
+      ],
+      "verification": "Compilare Blueprint interessati, provare casi normali/errore in Play e in cooperativa, allegare evidenze e verificare Repository checks.",
+      "assets": "Content/AFlagOfYourOwn/Blueprints/, Data/ e UI/; percorsi esatti da dichiarare prima della presa in carico.",
+      "area": "gameplay",
+      "needs_refinement": true,
+      "issue_number": 55,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/55"
+    },
+    {
+      "key": "minigame_repair",
+      "milestone": "M2",
+      "title": "Minigioco di manutenzione e riparazione dello scafo",
+      "estimate_oa": 4,
+      "estimate_range_oa": [
+        2.0,
+        8
+      ],
+      "confidence": "bassa",
+      "human_hours": 0.25,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "demo_decision"
+      ],
+      "scope": "Introdurre usura/difetti circoscritti e riparazione leggibile, con risorse e gesti differenziati dalla pulizia.",
+      "acceptance": [
+        "Diagnosi, materiale e completamento modificano la condizione della zona.",
+        "Consumo risorse e avanzamento autorevoli e riprendibili.",
+        "Frequenza dei lavori bilanciabile, con prova di cooperazione e interruzione."
+      ],
+      "verification": "Compilare Blueprint interessati, provare casi normali/errore in Play e in cooperativa, allegare evidenze e verificare Repository checks.",
+      "assets": "Content/AFlagOfYourOwn/Blueprints/, Data/ e UI/; percorsi esatti da dichiarare prima della presa in carico.",
+      "area": "gameplay",
+      "needs_refinement": true,
+      "issue_number": 56,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/56"
+    },
+    {
+      "key": "minigame_pumps",
+      "milestone": "M2",
+      "title": "Minigioco delle pompe e gestione delle infiltrazioni",
+      "estimate_oa": 4,
+      "estimate_range_oa": [
+        2.0,
+        8
+      ],
+      "confidence": "bassa",
+      "human_hours": 0.25,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "minigame_repair"
+      ],
+      "scope": "Collegare infiltrazioni modellate e lavoro alle pompe a un volume d acqua semplificato nello scafo.",
+      "acceptance": [
+        "Riparare la causa e pompare hanno effetti distinti e comprensibili.",
+        "Acqua interna influenza massa/assetto entro limiti stabili.",
+        "Due utenti, interruzione e salvataggio non duplicano azioni o azzerano problemi senza causa."
+      ],
+      "verification": "Scenario ripetibile con valori registrati, confronto di stato host/client e profiling sulla macchina di riferimento.",
+      "assets": "Content/AFlagOfYourOwn/Ships/, Environment/, Data/ e Config/; dichiarare mappe e asset binari prima dell editing.",
+      "area": "simulation",
+      "needs_refinement": true,
+      "issue_number": 57,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/57"
+    },
+    {
+      "key": "minigame_navigation",
+      "milestone": "M2",
+      "title": "Minigioco di rotta, bussola e punti di riferimento",
+      "estimate_oa": 4,
+      "estimate_range_oa": [
+        2.0,
+        8
+      ],
+      "confidence": "bassa",
+      "human_hours": 0.25,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "demo_decision"
+      ],
+      "scope": "Creare un compito di navigazione con lettura di rotta e riferimenti coerenti con l ambientazione scelta.",
+      "acceptance": [
+        "Scelta di rotta tiene conto di vento e destinazione e offre feedback.",
+        "Errore e correzione producono conseguenze gestibili e condivise.",
+        "Strumenti storici specifici inseriti solo dopo la decisione di epoca."
+      ],
+      "verification": "Compilare Blueprint interessati, provare casi normali/errore in Play e in cooperativa, allegare evidenze e verificare Repository checks.",
+      "assets": "Content/AFlagOfYourOwn/Blueprints/, Data/ e UI/; percorsi esatti da dichiarare prima della presa in carico.",
+      "area": "gameplay",
+      "needs_refinement": true,
+      "issue_number": 58,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/58"
+    },
+    {
+      "key": "minigame_lookout",
+      "milestone": "M2",
+      "title": "Minigioco di vedetta e segnalazione alla ciurma",
+      "estimate_oa": 2,
+      "estimate_range_oa": [
+        1.0,
+        4
+      ],
+      "confidence": "bassa",
+      "human_hours": 0.25,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "minigame_navigation"
+      ],
+      "scope": "Consentire osservazione e segnalazione utile di destinazioni/ostacoli, senza introdurre combattimento non deciso.",
+      "acceptance": [
+        "Rilevamento richiede un azione osservabile e fornisce informazione utile agli altri.",
+        "Segnalazioni condivise e limitate contro spam accidentale.",
+        "Compito valutato con nuova coppia di giocatori per chiarezza."
+      ],
+      "verification": "Compilare Blueprint interessati, provare casi normali/errore in Play e in cooperativa, allegare evidenze e verificare Repository checks.",
+      "assets": "Content/AFlagOfYourOwn/Blueprints/, Data/ e UI/; percorsi esatti da dichiarare prima della presa in carico.",
+      "area": "gameplay",
+      "needs_refinement": true,
+      "issue_number": 59,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/59"
+    },
+    {
+      "key": "food_stores",
+      "milestone": "M2",
+      "title": "Provviste, pasti e organizzazione delle scorte",
+      "estimate_oa": 4,
+      "estimate_range_oa": [
+        2.0,
+        8
+      ],
+      "confidence": "bassa",
+      "human_hours": 0.25,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "character_profile"
+      ],
+      "scope": "Collegare cucina e stiva a consumo di provviste durante i viaggi e benefici dei pasti secondo budget di design.",
+      "acceptance": [
+        "Quantita e qualita tracciate senza duplicazioni o consumo simultaneo errato.",
+        "Caricare/recuperare ingredienti e cucinare formano una catena comprensibile.",
+        "Benefici e tempi regolabili; bisogni punitivi o mortalita non aggiunti implicitamente."
+      ],
+      "verification": "Compilare Blueprint interessati, provare casi normali/errore in Play e in cooperativa, allegare evidenze e verificare Repository checks.",
+      "assets": "Content/AFlagOfYourOwn/Blueprints/, Data/ e UI/; percorsi esatti da dichiarare prima della presa in carico.",
+      "area": "gameplay",
+      "needs_refinement": true,
+      "issue_number": 60,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/60"
+    },
+    {
+      "key": "duty_rotation",
+      "milestone": "M2",
+      "title": "Responsabilita di ruolo e assistenza fra giocatori",
+      "estimate_oa": 4,
+      "estimate_range_oa": [
+        2.0,
+        8
+      ],
+      "confidence": "bassa",
+      "human_hours": 0.5,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "embark_ui",
+        "minigame_sails",
+        "minigame_anchor",
+        "minigame_pumps",
+        "minigame_lookout",
+        "food_stores"
+      ],
+      "scope": "Assegnare responsabilita e vantaggi coerenti ai ruoli, lasciando assistenza possibile durante lavoro ed emergenze.",
+      "acceptance": [
+        "Ogni ruolo ha compiti utili e opportunita di esperienza.",
+        "Nessun novizio resta senza azioni perche un esperto ha preso una postazione.",
+        "Cambio di incarico avviene al nuovo imbarco; assistenza non altera arbitrariamente il ruolo registrato."
+      ],
+      "verification": "Compilare Blueprint interessati, provare casi normali/errore in Play e in cooperativa, allegare evidenze e verificare Repository checks.",
+      "assets": "Content/AFlagOfYourOwn/Blueprints/, Data/ e UI/; percorsi esatti da dichiarare prima della presa in carico.",
+      "area": "gameplay",
+      "needs_refinement": true,
+      "issue_number": 61,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/61"
+    },
+    {
+      "key": "career_gate",
+      "milestone": "M2",
+      "title": "Gate carriera: cinque ruoli e progressione cooperativa",
+      "estimate_oa": 2,
+      "estimate_range_oa": [
+        1.0,
+        4
+      ],
+      "confidence": "bassa",
+      "human_hours": 4,
+      "kind": "gate",
+      "needs_product_decision": true,
+      "depends_on": [
+        "duty_rotation"
+      ],
+      "scope": "Verificare crescita da mozzo/cuoco ai ruoli avanzati con test accelerati e osservazioni sui tempi naturali.",
+      "acceptance": [
+        "Percorsi di sblocco, ri-imbarco e profilo persistente provati.",
+        "Gruppo misto novizi/esperti completa viaggi senza esclusione o grind giudicato bloccante.",
+        "Dati di playtest, difetti e decisione registrati; accesso al comando approvato."
+      ],
+      "verification": "Revisione di specifica, esempi, esclusioni e decisioni; approvazione del responsabile per le ipotesi di prodotto.",
+      "assets": "Docs/ e dati di specifica; nessun asset da modificare prima della decisione.",
+      "area": "design",
+      "needs_refinement": true,
+      "issue_number": 62,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/62"
+    },
+    {
+      "key": "ownership_design",
+      "milestone": "M3",
+      "title": "Decidere proprieta, denaro e permessi nel gruppo cooperativo",
+      "estimate_oa": 2,
+      "estimate_range_oa": [
+        1.0,
+        4
+      ],
+      "confidence": "bassa",
+      "human_hours": 0.5,
+      "kind": "task",
+      "needs_product_decision": true,
+      "depends_on": [
+        "career_gate"
+      ],
+      "scope": "Definire chi possiede navi/villa e come gli amici collaborano, mantenendo personale l esperienza gia confermata.",
+      "acceptance": [
+        "Policy di beni/denaro/mondo e progressi fra host definita con l utente.",
+        "Comando di una nave e proprieta distinti oppure relazione alternativa approvata.",
+        "Conflitti fra capitani, ingresso/uscita e acquisti condivisi descritti con esempi."
+      ],
+      "verification": "Revisione di specifica, esempi, esclusioni e decisioni; approvazione del responsabile per le ipotesi di prodotto.",
+      "assets": "Docs/ e dati di specifica; nessun asset da modificare prima della decisione.",
+      "area": "design",
+      "needs_refinement": true,
+      "issue_number": 63,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/63"
+    },
+    {
+      "key": "ship_catalog",
+      "milestone": "M3",
+      "title": "Approvare catalogo navale, epoca e budget contenuti",
+      "estimate_oa": 2,
+      "estimate_range_oa": [
+        1.0,
+        4
+      ],
+      "confidence": "bassa",
+      "human_hours": 0.5,
+      "kind": "task",
+      "needs_product_decision": true,
+      "depends_on": [
+        "career_gate"
+      ],
+      "scope": "Usare la ricerca storica per scegliere un catalogo finito; budget proposto: scafo demo piu una famiglia media e una grande.",
+      "acceptance": [
+        "Epoca/geografia/finzione dichiarate; nomi e armi verificati su esemplari.",
+        "Ruolo, spazi, carico, rig e capienza NPC <=20 per ogni famiglia.",
+        "Numero di navi e varianti approvato prima di modellare; galeoni/combattimento non introdotti per implicazione."
+      ],
+      "verification": "Revisione di specifica, esempi, esclusioni e decisioni; approvazione del responsabile per le ipotesi di prodotto.",
+      "assets": "Docs/ e dati di specifica; nessun asset da modificare prima della decisione.",
+      "area": "design",
+      "needs_refinement": true,
+      "issue_number": 64,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/64"
+    },
+    {
+      "key": "economy",
+      "milestone": "M3",
+      "title": "Economia di paga, provviste e risparmio per la nave",
+      "estimate_oa": 4,
+      "estimate_range_oa": [
+        2.0,
+        8
+      ],
+      "confidence": "bassa",
+      "human_hours": 0.25,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "ownership_design"
+      ],
+      "scope": "Collegare guadagni e costi alla possibilita di acquisire una nave senza estendere a sistemi non confermati.",
+      "acceptance": [
+        "Conti e transazioni autorevoli e persistenti secondo policy di proprieta.",
+        "Bilancio di un viaggio leggibile e valori modificabili.",
+        "Acquisti ripetuti, saldo insufficiente e riconnessione non duplicano beni o debiti."
+      ],
+      "verification": "Compilare Blueprint interessati, provare casi normali/errore in Play e in cooperativa, allegare evidenze e verificare Repository checks.",
+      "assets": "Content/AFlagOfYourOwn/Blueprints/, Data/ e UI/; percorsi esatti da dichiarare prima della presa in carico.",
+      "area": "gameplay",
+      "needs_refinement": true,
+      "issue_number": 65,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/65"
+    },
+    {
+      "key": "contracts",
+      "milestone": "M3",
+      "title": "Contratti di imbarco e incarichi di viaggio per ruolo",
+      "estimate_oa": 4,
+      "estimate_range_oa": [
+        2.0,
+        8
+      ],
+      "confidence": "bassa",
+      "human_hours": 0.25,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "economy"
+      ],
+      "scope": "Offrire nuovi imbarchi e responsabilita adeguate al ruolo, inclusi incarichi di comando secondo la policy approvata.",
+      "acceptance": [
+        "Condizioni, paga e requisiti visibili prima dell imbarco.",
+        "Mozzo, cuoco e ruoli avanzati hanno contratti coerenti e giocabili in gruppo.",
+        "Accettazione, esito e abbandono coerenti con esperienza e salvataggi."
+      ],
+      "verification": "Compilare Blueprint interessati, provare casi normali/errore in Play e in cooperativa, allegare evidenze e verificare Repository checks.",
+      "assets": "Content/AFlagOfYourOwn/Blueprints/, Data/ e UI/; percorsi esatti da dichiarare prima della presa in carico.",
+      "area": "gameplay",
+      "needs_refinement": true,
+      "issue_number": 66,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/66"
+    },
+    {
+      "key": "npc_roles",
+      "milestone": "M3",
+      "title": "Ciurma NPC con ruoli e limite di venti per nave",
+      "estimate_oa": 8,
+      "estimate_range_oa": [
+        4.0,
+        16
+      ],
+      "confidence": "bassa",
+      "human_hours": 0.5,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "contracts"
+      ],
+      "scope": "Gestire reclutamento e assegnazione di una ciurma limitata che assiste i giocatori nelle mansioni esistenti.",
+      "acceptance": [
+        "Limite 20 NPC imposto dai dati e dal server anche sulla nave piu grande; umani contati separatamente fino a quattro.",
+        "NPC usano incarichi equivalenti, priorita e risorse senza completamenti gratuiti incoerenti.",
+        "Aiuto umano e delega non confliggono o sottraggono sempre il compito ai giocatori."
+      ],
+      "verification": "Compilare Blueprint interessati, provare casi normali/errore in Play e in cooperativa, allegare evidenze e verificare Repository checks.",
+      "assets": "Content/AFlagOfYourOwn/Blueprints/, Data/ e UI/; percorsi esatti da dichiarare prima della presa in carico.",
+      "area": "gameplay",
+      "needs_refinement": true,
+      "issue_number": 67,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/67"
+    },
+    {
+      "key": "npc_movement",
+      "milestone": "M3",
+      "title": "Muovere la ciurma fra postazioni sullo scafo mobile",
+      "estimate_oa": 8,
+      "estimate_range_oa": [
+        4.0,
+        16
+      ],
+      "confidence": "bassa",
+      "human_hours": 0.5,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "npc_roles"
+      ],
+      "scope": "Far raggiungere e liberare postazioni a una ciurma fino a venti, usando percorsi locali e comportamento limitato.",
+      "acceptance": [
+        "Venti NPC e quattro giocatori nello scenario concordato non bloccano percorsi e scale.",
+        "Postazioni prenotate, deviazioni e fallimenti di percorso gestiti.",
+        "Replica e costo AI misurati; nessuna simulazione dettagliata infinita richiesta fuori scena."
+      ],
+      "verification": "Prova host/client con 2 e 4 processi, almeno 2 PC per il gate; ritardo di rete e disconnessione secondo Docs/PlaytestPlan.md.",
+      "assets": "Content/AFlagOfYourOwn/Blueprints/, Characters/, UI/ e Config/; eventuale modulo C++ solo dopo lo spike architetturale.",
+      "area": "network",
+      "needs_refinement": true,
+      "issue_number": 68,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/68"
+    },
+    {
+      "key": "captain_commands",
+      "milestone": "M3",
+      "title": "Comando della nave e assegnazione del lavoro",
+      "estimate_oa": 4,
+      "estimate_range_oa": [
+        2.0,
+        8
+      ],
+      "confidence": "bassa",
+      "human_hours": 0.25,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "npc_roles"
+      ],
+      "scope": "Dare al capitano decisioni di rotta e assegnazione delle mansioni, con permessi cooperativi espliciti.",
+      "acceptance": [
+        "Solo incarico autorizzato impartisce comandi secondo la policy; gli altri vedono stato e priorita.",
+        "NPC e giocatori possono accettare/assistere compiti con feedback.",
+        "Ordini contrastanti, abbandono e cambio capitano hanno regole recuperabili."
+      ],
+      "verification": "Compilare Blueprint interessati, provare casi normali/errore in Play e in cooperativa, allegare evidenze e verificare Repository checks.",
+      "assets": "Content/AFlagOfYourOwn/Blueprints/, Data/ e UI/; percorsi esatti da dichiarare prima della presa in carico.",
+      "area": "gameplay",
+      "needs_refinement": true,
+      "issue_number": 69,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/69"
+    },
+    {
+      "key": "ship_purchase",
+      "milestone": "M3",
+      "title": "Acquisire e imbarcarsi sulla prima nave propria",
+      "estimate_oa": 4,
+      "estimate_range_oa": [
+        2.0,
+        8
+      ],
+      "confidence": "bassa",
+      "human_hours": 0.25,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "ship_catalog",
+        "contracts"
+      ],
+      "scope": "Realizzare il passaggio da lavoro a bordo a proprieta secondo la decisione del gruppo.",
+      "acceptance": [
+        "Acquisto verificato atomicamente; nave, denaro e proprieta salvati.",
+        "Nuovo imbarco sulla nave acquisita mantiene carriera e ruoli disponibili.",
+        "Ricaricamento e richieste simultanee non duplicano nave o pagamento."
+      ],
+      "verification": "Nuovo profilo, salvataggio, riavvio, riconnessione, dati assenti/corrotti e ricompensa ripetuta: verificare stato coerente e nessun duplicato.",
+      "assets": "Content/AFlagOfYourOwn/Blueprints/, Data/; dati runtime solo in Saved/ ignorato.",
+      "area": "save",
+      "needs_refinement": true,
+      "issue_number": 70,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/70"
+    },
+    {
+      "key": "ship_refit",
+      "milestone": "M3",
+      "title": "Manutenzione in porto e dotazioni configurabili",
+      "estimate_oa": 4,
+      "estimate_range_oa": [
+        2.0,
+        8
+      ],
+      "confidence": "bassa",
+      "human_hours": 0.25,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "ship_purchase"
+      ],
+      "scope": "Offrire ripristino dello scafo e piccole dotazioni previste dal catalogo, senza costruzione libera della nave.",
+      "acceptance": [
+        "Costo e effetto delle dotazioni dichiarati e persistenti.",
+        "Massa/assetto/capienza si aggiornano coerentemente.",
+        "Opzioni limitate al budget approvato e verificate su una nave di prova."
+      ],
+      "verification": "Compilare Blueprint interessati, provare casi normali/errore in Play e in cooperativa, allegare evidenze e verificare Repository checks.",
+      "assets": "Content/AFlagOfYourOwn/Blueprints/, Data/ e UI/; percorsi esatti da dichiarare prima della presa in carico.",
+      "area": "gameplay",
+      "needs_refinement": true,
+      "issue_number": 71,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/71"
+    },
+    {
+      "key": "medium_hull",
+      "milestone": "M3",
+      "title": "Scafo e interni low poly della famiglia media",
+      "estimate_oa": 8,
+      "estimate_range_oa": [
+        4.0,
+        16
+      ],
+      "confidence": "bassa",
+      "human_hours": 0.5,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "ship_catalog"
+      ],
+      "scope": "Produrre uno scafo medio originale secondo scheda approvata, con cucina/stiva e percorsi compatibili.",
+      "acceptance": [
+        "Modello, collisioni e interni verificati in terza persona.",
+        "Postazioni per mansioni e ciurma collocate e percorribili.",
+        "Materiali, scala, riferimenti e licenze documentati."
+      ],
+      "verification": "Ispezione in Unreal, screenshot in terza persona e controllo collisioni/riferimenti/licenze; build della scena di prova.",
+      "assets": "Content/AFlagOfYourOwn/Environment/, Ships/, Characters/; registrare i percorsi esatti e le licenze prima della presa in carico.",
+      "area": "art",
+      "needs_refinement": true,
+      "issue_number": 72,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/72"
+    },
+    {
+      "key": "medium_rig",
+      "milestone": "M3",
+      "title": "Armo e comportamento velico della nave media",
+      "estimate_oa": 8,
+      "estimate_range_oa": [
+        4.0,
+        16
+      ],
+      "confidence": "bassa",
+      "human_hours": 0.5,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "medium_hull"
+      ],
+      "scope": "Integrare alberi, vele e manovre della famiglia media con forze e minigiochi, secondo riferimento storico.",
+      "acceptance": [
+        "Regolazioni visive corrispondono alle forze e sono replicate.",
+        "Andature e carico confrontati con lo scafo demo.",
+        "Interazione con NPC e giocatori verificata senza manovre irraggiungibili."
+      ],
+      "verification": "Scenario ripetibile con valori registrati, confronto di stato host/client e profiling sulla macchina di riferimento.",
+      "assets": "Content/AFlagOfYourOwn/Ships/, Environment/, Data/ e Config/; dichiarare mappe e asset binari prima dell editing.",
+      "area": "simulation",
+      "needs_refinement": true,
+      "issue_number": 73,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/73"
+    },
+    {
+      "key": "large_hull",
+      "milestone": "M3",
+      "title": "Scafo e interni low poly della famiglia maggiore",
+      "estimate_oa": 8,
+      "estimate_range_oa": [
+        4.0,
+        16
+      ],
+      "confidence": "bassa",
+      "human_hours": 0.5,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "medium_hull"
+      ],
+      "scope": "Produrre uno scafo grande entro il budget approvato e progettato per massimo venti NPC piu giocatori.",
+      "acceptance": [
+        "Percorsi e postazioni compatibili con capienza e camera.",
+        "Collisioni, stiva/cucina, massa e geometria documentate.",
+        "Profilo di asset e materiali entro budget prima di aggiungere varianti."
+      ],
+      "verification": "Ispezione in Unreal, screenshot in terza persona e controllo collisioni/riferimenti/licenze; build della scena di prova.",
+      "assets": "Content/AFlagOfYourOwn/Environment/, Ships/, Characters/; registrare i percorsi esatti e le licenze prima della presa in carico.",
+      "area": "art",
+      "needs_refinement": true,
+      "issue_number": 74,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/74"
+    },
+    {
+      "key": "large_rig",
+      "milestone": "M3",
+      "title": "Armo e comportamento velico della nave maggiore",
+      "estimate_oa": 8,
+      "estimate_range_oa": [
+        4.0,
+        16
+      ],
+      "confidence": "bassa",
+      "human_hours": 0.5,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "large_hull",
+        "medium_rig"
+      ],
+      "scope": "Integrare rig, forze e mansioni della famiglia maggiore senza richiedere equipaggi storici fuori scala.",
+      "acceptance": [
+        "Vele e manovre sono leggibili e raggiungibili dalla ciurma limitata.",
+        "Comportamento sotto vento/carico/mare verificato sulla baseline.",
+        "Cooperazione e delega mantengono controllo e possibilita di aiuto."
+      ],
+      "verification": "Scenario ripetibile con valori registrati, confronto di stato host/client e profiling sulla macchina di riferimento.",
+      "assets": "Content/AFlagOfYourOwn/Ships/, Environment/, Data/ e Config/; dichiarare mappe e asset binari prima dell editing.",
+      "area": "simulation",
+      "needs_refinement": true,
+      "issue_number": 75,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/75"
+    },
+    {
+      "key": "ship_balance",
+      "milestone": "M3",
+      "title": "Bilanciare famiglie navali, carico e lavoro della ciurma",
+      "estimate_oa": 4,
+      "estimate_range_oa": [
+        2.0,
+        8
+      ],
+      "confidence": "bassa",
+      "human_hours": 2,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "large_rig",
+        "npc_movement",
+        "captain_commands",
+        "ship_refit"
+      ],
+      "scope": "Confrontare le famiglie approvate come compromessi di navigazione, capienza e lavoro, evitando una sola scelta sempre migliore.",
+      "acceptance": [
+        "Stessi viaggi confrontati per durata, manovre, carico e impegno del gruppo.",
+        "Venti NPC restano un limite massimo, non una necessita su ogni nave.",
+        "Parametri e osservazioni registrati; eventuali ritocchi in task separati se oltre scope."
+      ],
+      "verification": "Revisione di specifica, esempi, esclusioni e decisioni; approvazione del responsabile per le ipotesi di prodotto.",
+      "assets": "Docs/ e dati di specifica; nessun asset da modificare prima della decisione.",
+      "area": "design",
+      "needs_refinement": true,
+      "issue_number": 76,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/76"
+    },
+    {
+      "key": "captain_gate",
+      "milestone": "M3",
+      "title": "Gate comando e proprieta: viaggio completo con ciurma",
+      "estimate_oa": 2,
+      "estimate_range_oa": [
+        1.0,
+        4
+      ],
+      "confidence": "bassa",
+      "human_hours": 4,
+      "kind": "gate",
+      "needs_product_decision": true,
+      "depends_on": [
+        "ship_balance"
+      ],
+      "scope": "Provare il passaggio a capitano e proprietario con amici e ciurma NPC entro i limiti.",
+      "acceptance": [
+        "Viaggio, comandi, manutenzione e nuovo imbarco completati su famiglie previste.",
+        "Progressi e proprieta conservati dopo riavvio e cambio ruolo.",
+        "Playtest valuta responsabilita, chiarezza e carico di lavoro; approvazione esplicita della fase flotta."
+      ],
+      "verification": "Revisione di specifica, esempi, esclusioni e decisioni; approvazione del responsabile per le ipotesi di prodotto.",
+      "assets": "Docs/ e dati di specifica; nessun asset da modificare prima della decisione.",
+      "area": "design",
+      "needs_refinement": true,
+      "issue_number": 77,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/77"
+    },
+    {
+      "key": "fleet_design",
+      "milestone": "M4",
+      "title": "Definire limiti e regole della flotta cooperativa",
+      "estimate_oa": 2,
+      "estimate_range_oa": [
+        1.0,
+        4
+      ],
+      "confidence": "bassa",
+      "human_hours": 0.5,
+      "kind": "task",
+      "needs_product_decision": true,
+      "depends_on": [
+        "captain_gate"
+      ],
+      "scope": "Fissare numero di navi, delega, permessi e tempi di spedizione per il perimetro 1.0.",
+      "acceptance": [
+        "Limite finito di navi e numero di scafi fisici contemporanei approvati.",
+        "Progressione in assenza dell host e gestione temporale definite esplicitamente.",
+        "Trasferimento dei giocatori e ruoli dei capitani NPC descritti con esempi."
+      ],
+      "verification": "Revisione di specifica, esempi, esclusioni e decisioni; approvazione del responsabile per le ipotesi di prodotto.",
+      "assets": "Docs/ e dati di specifica; nessun asset da modificare prima della decisione.",
+      "area": "design",
+      "needs_refinement": true,
+      "issue_number": 78,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/78"
+    },
+    {
+      "key": "fleet_registry",
+      "milestone": "M4",
+      "title": "Registro persistente di piu navi e relativi equipaggi",
+      "estimate_oa": 4,
+      "estimate_range_oa": [
+        2.0,
+        8
+      ],
+      "confidence": "bassa",
+      "human_hours": 0,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "fleet_design"
+      ],
+      "scope": "Estendere la proprieta a una flotta con identificativi stabili, capienza e disponibilita.",
+      "acceptance": [
+        "Ogni nave ha stato e equipaggio distinti; limiti di catalogo e venti NPC rispettati.",
+        "Acquisto/cessione consentiti dalla policy sono atomici.",
+        "Salvataggio e ricostruzione non duplicano scafi o equipaggi."
+      ],
+      "verification": "Nuovo profilo, salvataggio, riavvio, riconnessione, dati assenti/corrotti e ricompensa ripetuta: verificare stato coerente e nessun duplicato.",
+      "assets": "Content/AFlagOfYourOwn/Blueprints/, Data/; dati runtime solo in Saved/ ignorato.",
+      "area": "save",
+      "needs_refinement": true,
+      "issue_number": 79,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/79"
+    },
+    {
+      "key": "captain_assignment",
+      "milestone": "M4",
+      "title": "Nominare capitani NPC e assegnare navi",
+      "estimate_oa": 4,
+      "estimate_range_oa": [
+        2.0,
+        8
+      ],
+      "confidence": "bassa",
+      "human_hours": 0,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "fleet_registry"
+      ],
+      "scope": "Delegare comando e incarichi a capitani NPC entro i requisiti della flotta.",
+      "acceptance": [
+        "Una nave ha un comando valido e permessi verificati.",
+        "Riassegnazione preserva equipaggio, provviste e missioni.",
+        "Intervento dei giocatori in una nave delegata rispetta la policy approvata."
+      ],
+      "verification": "Compilare Blueprint interessati, provare casi normali/errore in Play e in cooperativa, allegare evidenze e verificare Repository checks.",
+      "assets": "Content/AFlagOfYourOwn/Blueprints/, Data/ e UI/; percorsi esatti da dichiarare prima della presa in carico.",
+      "area": "gameplay",
+      "needs_refinement": true,
+      "issue_number": 80,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/80"
+    },
+    {
+      "key": "expedition_sim",
+      "milestone": "M4",
+      "title": "Spedizioni delegate con provviste e risultati verificabili",
+      "estimate_oa": 8,
+      "estimate_range_oa": [
+        4.0,
+        16
+      ],
+      "confidence": "bassa",
+      "human_hours": 0,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "captain_assignment"
+      ],
+      "scope": "Simulare viaggi di flotta in forma limitata e leggibile, usando tempo/meteo e risorse secondo la specifica.",
+      "acceptance": [
+        "Partenza, avanzamento, esito e rientro hanno stato persistente.",
+        "Risorse, tempi e risultati sono spiegabili; nessuna ricompensa duplicata.",
+        "Pausa/riavvio/assenza host rispettano la policy temporale concordata."
+      ],
+      "verification": "Compilare Blueprint interessati, provare casi normali/errore in Play e in cooperativa, allegare evidenze e verificare Repository checks.",
+      "assets": "Content/AFlagOfYourOwn/Blueprints/, Data/ e UI/; percorsi esatti da dichiarare prima della presa in carico.",
+      "area": "gameplay",
+      "needs_refinement": true,
+      "issue_number": 81,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/81"
+    },
+    {
+      "key": "dispatch_ui",
+      "milestone": "M4",
+      "title": "Interfaccia cooperativa per pianificare e seguire spedizioni",
+      "estimate_oa": 4,
+      "estimate_range_oa": [
+        2.0,
+        8
+      ],
+      "confidence": "bassa",
+      "human_hours": 0.5,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "expedition_sim"
+      ],
+      "scope": "Mostrare navi, capitani, destinazioni, provviste e stato delle spedizioni con azioni autorizzate.",
+      "acceptance": [
+        "Piano comprensibile prima della conferma e aggiornato per tutti.",
+        "Richieste simultanee non inviano due volte la stessa nave.",
+        "Esito e interventi necessari sono leggibili e accessibili."
+      ],
+      "verification": "Compilare Blueprint interessati, provare casi normali/errore in Play e in cooperativa, allegare evidenze e verificare Repository checks.",
+      "assets": "Content/AFlagOfYourOwn/UI/ e Data/; riservare i Widget Blueprint interessati.",
+      "area": "ui",
+      "needs_refinement": true,
+      "issue_number": 82,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/82"
+    },
+    {
+      "key": "fleet_persistence",
+      "milestone": "M4",
+      "title": "Salvare e riprendere spedizioni senza duplicazioni",
+      "estimate_oa": 4,
+      "estimate_range_oa": [
+        2.0,
+        8
+      ],
+      "confidence": "bassa",
+      "human_hours": 0,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "expedition_sim"
+      ],
+      "scope": "Rendere atomici salvataggio, consumo delle risorse e consegna dei risultati della flotta.",
+      "acceptance": [
+        "Riavvio in ogni fase ripristina un solo stato coerente.",
+        "Tempo e premi resistono a caricamenti ripetuti e riconnessioni.",
+        "Dati incompatibili hanno migrazione/errore gestito secondo schema."
+      ],
+      "verification": "Nuovo profilo, salvataggio, riavvio, riconnessione, dati assenti/corrotti e ricompensa ripetuta: verificare stato coerente e nessun duplicato.",
+      "assets": "Content/AFlagOfYourOwn/Blueprints/, Data/; dati runtime solo in Saved/ ignorato.",
+      "area": "save",
+      "needs_refinement": true,
+      "issue_number": 83,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/83"
+    },
+    {
+      "key": "fleet_transition",
+      "milestone": "M4",
+      "title": "Passare fra nave delegata e nave fisica vicina ai giocatori",
+      "estimate_oa": 8,
+      "estimate_range_oa": [
+        4.0,
+        16
+      ],
+      "confidence": "bassa",
+      "human_hours": 0.5,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "expedition_sim"
+      ],
+      "scope": "Materializzare una nave dove serve e riportarla alla simulazione delegata senza doppio stato.",
+      "acceptance": [
+        "Trasferimento atomico di posizione, carico, equipaggio, danni e incarico.",
+        "Due gruppi di giocatori sulle navi consentite vedono stati coerenti.",
+        "Limite di scafi attivi e costo runtime rispettati e misurati."
+      ],
+      "verification": "Prova host/client con 2 e 4 processi, almeno 2 PC per il gate; ritardo di rete e disconnessione secondo Docs/PlaytestPlan.md.",
+      "assets": "Content/AFlagOfYourOwn/Blueprints/, Characters/, UI/ e Config/; eventuale modulo C++ solo dopo lo spike architetturale.",
+      "area": "network",
+      "needs_refinement": true,
+      "issue_number": 84,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/84"
+    },
+    {
+      "key": "fleet_gate",
+      "milestone": "M4",
+      "title": "Gate flotta: delegare, intervenire e ritrovare i risultati",
+      "estimate_oa": 2,
+      "estimate_range_oa": [
+        1.0,
+        4
+      ],
+      "confidence": "bassa",
+      "human_hours": 4,
+      "kind": "gate",
+      "needs_product_decision": true,
+      "depends_on": [
+        "dispatch_ui",
+        "fleet_persistence",
+        "fleet_transition"
+      ],
+      "scope": "Validare un ciclo di gestione della flotta nel mondo cooperativo.",
+      "acceptance": [
+        "Almeno due navi svolgono incarichi distinti nel limite approvato.",
+        "Intervento dei giocatori e riavvio mantengono risultati unici.",
+        "Playtest valuta utilita della delega e chiarezza; autorizzazione alla fase villa."
+      ],
+      "verification": "Revisione di specifica, esempi, esclusioni e decisioni; approvazione del responsabile per le ipotesi di prodotto.",
+      "assets": "Docs/ e dati di specifica; nessun asset da modificare prima della decisione.",
+      "area": "design",
+      "needs_refinement": true,
+      "issue_number": 85,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/85"
+    },
+    {
+      "key": "estate_design",
+      "milestone": "M5",
+      "title": "Definire villa, isola e crescita della residenza",
+      "estimate_oa": 2,
+      "estimate_range_oa": [
+        1.0,
+        4
+      ],
+      "confidence": "bassa",
+      "human_hours": 0.5,
+      "kind": "task",
+      "needs_product_decision": true,
+      "depends_on": [
+        "fleet_gate"
+      ],
+      "scope": "Definire una residenza funzionale collegata alla flotta e un budget finito di spazi/migliorie.",
+      "acceptance": [
+        "Accesso e proprieta coerenti con il gruppo; ritorno nave-villa descritto.",
+        "Spazi, stati di crescita e interazioni approvati.",
+        "Costruzione libera e sistemi cittadini restano fuori dal perimetro finche non decisi."
+      ],
+      "verification": "Revisione di specifica, esempi, esclusioni e decisioni; approvazione del responsabile per le ipotesi di prodotto.",
+      "assets": "Docs/ e dati di specifica; nessun asset da modificare prima della decisione.",
+      "area": "design",
+      "needs_refinement": true,
+      "issue_number": 86,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/86"
+    },
+    {
+      "key": "island_scene",
+      "milestone": "M5",
+      "title": "Isola low poly e approdo della residenza",
+      "estimate_oa": 8,
+      "estimate_range_oa": [
+        4.0,
+        16
+      ],
+      "confidence": "bassa",
+      "human_hours": 0.5,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "estate_design"
+      ],
+      "scope": "Realizzare un approdo e una zona percorribile che collegano nave e villa.",
+      "acceptance": [
+        "Quattro giocatori possono arrivare, scendere e raggiungere la casa.",
+        "Costa/acqua/collisioni leggibili in stati di mare previsti.",
+        "Asset originali/licenziati e budget grafico rispettati."
+      ],
+      "verification": "Ispezione in Unreal, screenshot in terza persona e controllo collisioni/riferimenti/licenze; build della scena di prova.",
+      "assets": "Content/AFlagOfYourOwn/Environment/, Ships/, Characters/; registrare i percorsi esatti e le licenze prima della presa in carico.",
+      "area": "art",
+      "needs_refinement": true,
+      "issue_number": 87,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/87"
+    },
+    {
+      "key": "villa_shell",
+      "milestone": "M5",
+      "title": "Villa low poly con spazi funzionali cooperativi",
+      "estimate_oa": 8,
+      "estimate_range_oa": [
+        4.0,
+        16
+      ],
+      "confidence": "bassa",
+      "human_hours": 0.5,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "island_scene"
+      ],
+      "scope": "Produrre gli spazi approvati per abitare e dirigere le attivita marittime.",
+      "acceptance": [
+        "Percorsi, camera e interazioni funzionano con quattro giocatori.",
+        "Spazi distinguibili e arredamento entro budget; nessun ambiente vuoto dichiarato funzionale.",
+        "Verifica di scala, collisioni e riferimenti in build."
+      ],
+      "verification": "Ispezione in Unreal, screenshot in terza persona e controllo collisioni/riferimenti/licenze; build della scena di prova.",
+      "assets": "Content/AFlagOfYourOwn/Environment/, Ships/, Characters/; registrare i percorsi esatti e le licenze prima della presa in carico.",
+      "area": "art",
+      "needs_refinement": true,
+      "issue_number": 88,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/88"
+    },
+    {
+      "key": "estate_progress",
+      "milestone": "M5",
+      "title": "Acquisizione e miglioramenti persistenti della villa",
+      "estimate_oa": 4,
+      "estimate_range_oa": [
+        2.0,
+        8
+      ],
+      "confidence": "bassa",
+      "human_hours": 0,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "villa_shell"
+      ],
+      "scope": "Collegare patrimonio e crescita visibile della residenza tramite gli stati approvati.",
+      "acceptance": [
+        "Costi e requisiti leggibili; acquisti atomici e autorizzati.",
+        "Aspetto e funzionalita corrispondono allo stato salvato.",
+        "Amici vedono lo stesso sviluppo dopo ingresso e riavvio."
+      ],
+      "verification": "Nuovo profilo, salvataggio, riavvio, riconnessione, dati assenti/corrotti e ricompensa ripetuta: verificare stato coerente e nessun duplicato.",
+      "assets": "Content/AFlagOfYourOwn/Blueprints/, Data/; dati runtime solo in Saved/ ignorato.",
+      "area": "save",
+      "needs_refinement": true,
+      "issue_number": 89,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/89"
+    },
+    {
+      "key": "villa_fleet_desk",
+      "milestone": "M5",
+      "title": "Gestire la flotta dalla villa",
+      "estimate_oa": 4,
+      "estimate_range_oa": [
+        2.0,
+        8
+      ],
+      "confidence": "bassa",
+      "human_hours": 0.25,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "estate_progress"
+      ],
+      "scope": "Integrare nella residenza una postazione fisica per impartire e seguire incarichi della flotta.",
+      "acceptance": [
+        "Interazione apre gli stessi dati autorevoli della flotta.",
+        "Permessi e modifiche simultanee rispettano la policy.",
+        "Giocatori possono alternare gestione da terra e presenza sulle navi."
+      ],
+      "verification": "Compilare Blueprint interessati, provare casi normali/errore in Play e in cooperativa, allegare evidenze e verificare Repository checks.",
+      "assets": "Content/AFlagOfYourOwn/UI/ e Data/; riservare i Widget Blueprint interessati.",
+      "area": "ui",
+      "needs_refinement": true,
+      "issue_number": 90,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/90"
+    },
+    {
+      "key": "estate_storage",
+      "milestone": "M5",
+      "title": "Collegare stiva, magazzino della villa e provviste",
+      "estimate_oa": 4,
+      "estimate_range_oa": [
+        2.0,
+        8
+      ],
+      "confidence": "bassa",
+      "human_hours": 0.25,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "estate_progress"
+      ],
+      "scope": "Trasferire beni fra nave e residenza usando il lavoro di movimentazione e i limiti approvati.",
+      "acceptance": [
+        "Origine/destinazione e capacita controllate senza duplicazioni.",
+        "Trasferimento interrotto o disconnessione ha stato recuperabile.",
+        "Disposizione e accessibilita mantengono valore al minigioco della stiva."
+      ],
+      "verification": "Compilare Blueprint interessati, provare casi normali/errore in Play e in cooperativa, allegare evidenze e verificare Repository checks.",
+      "assets": "Content/AFlagOfYourOwn/Blueprints/, Data/ e UI/; percorsi esatti da dichiarare prima della presa in carico.",
+      "area": "gameplay",
+      "needs_refinement": true,
+      "issue_number": 91,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/91"
+    },
+    {
+      "key": "home_interactions",
+      "milestone": "M5",
+      "title": "Vita nella villa con cucina, ordine e manutenzione",
+      "estimate_oa": 4,
+      "estimate_range_oa": [
+        2.0,
+        8
+      ],
+      "confidence": "bassa",
+      "human_hours": 0.5,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "estate_storage"
+      ],
+      "scope": "Riutilizzare le mansioni significative nei soli spazi domestici approvati, collegandole alle provviste e alla vita del gruppo.",
+      "acceptance": [
+        "Attivita condivise hanno gesti e risultati visibili, mantenendo identita dei minigiochi.",
+        "Ricompense e benefici rispettano regole anti-duplicazione e bilanciamento.",
+        "La residenza offre una ragione per tornare senza imporre manutenzione incessante."
+      ],
+      "verification": "Compilare Blueprint interessati, provare casi normali/errore in Play e in cooperativa, allegare evidenze e verificare Repository checks.",
+      "assets": "Content/AFlagOfYourOwn/Blueprints/, Data/ e UI/; percorsi esatti da dichiarare prima della presa in carico.",
+      "area": "gameplay",
+      "needs_refinement": true,
+      "issue_number": 92,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/92"
+    },
+    {
+      "key": "estate_gate",
+      "milestone": "M5",
+      "title": "Gate villa: dal viaggio alla gestione dall isola",
+      "estimate_oa": 2,
+      "estimate_range_oa": [
+        1.0,
+        4
+      ],
+      "confidence": "bassa",
+      "human_hours": 4,
+      "kind": "gate",
+      "needs_product_decision": true,
+      "depends_on": [
+        "villa_fleet_desk",
+        "home_interactions"
+      ],
+      "scope": "Validare la fantasia di vivere sull isola e dirigere la flotta con gli amici.",
+      "acceptance": [
+        "Ciclo nave-approdo-villa-spedizione-ritorno completo e persistente.",
+        "Proprieta e progressi personali restano coerenti per tutti.",
+        "Playtest su significato della crescita e utilita delle attivita; perimetro beta approvato."
+      ],
+      "verification": "Revisione di specifica, esempi, esclusioni e decisioni; approvazione del responsabile per le ipotesi di prodotto.",
+      "assets": "Docs/ e dati di specifica; nessun asset da modificare prima della decisione.",
+      "area": "design",
+      "needs_refinement": true,
+      "issue_number": 93,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/93"
+    },
+    {
+      "key": "content_budget",
+      "milestone": "M6",
+      "title": "Congelare il perimetro e la matrice contenuti della 1.0",
+      "estimate_oa": 2,
+      "estimate_range_oa": [
+        1.0,
+        4
+      ],
+      "confidence": "bassa",
+      "human_hours": 0.5,
+      "kind": "task",
+      "needs_product_decision": true,
+      "depends_on": [
+        "estate_gate"
+      ],
+      "scope": "Rivedere il perimetro confermato e chiudere le decisioni rimaste prima del completamento dei contenuti.",
+      "acceptance": [
+        "Matrice di navi, mansioni, viaggi, ruoli, NPC e spazi con stato e verifica.",
+        "Combattimento, PvP, MMO e funzionalita non concordate non inseriti automaticamente.",
+        "Lista finita delle lacune con issue <=8 OA e decisione di rilascio concordata."
+      ],
+      "verification": "Revisione di specifica, esempi, esclusioni e decisioni; approvazione del responsabile per le ipotesi di prodotto.",
+      "assets": "Docs/ e dati di specifica; nessun asset da modificare prima della decisione.",
+      "area": "design",
+      "needs_refinement": true,
+      "issue_number": 94,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/94"
+    },
+    {
+      "key": "local_water_spike",
+      "milestone": "M6",
+      "title": "Spike: acqua locale, scia e spruzzi entro budget",
+      "estimate_oa": 2,
+      "estimate_range_oa": [
+        1.0,
+        4
+      ],
+      "confidence": "bassa",
+      "human_hours": 0,
+      "kind": "spike",
+      "needs_product_decision": false,
+      "depends_on": [
+        "content_budget"
+      ],
+      "scope": "Valutare shallow water/Niagara/FLIP per dettagli locali, con stato di gameplay separato dagli effetti.",
+      "acceptance": [
+        "Prova limitata o confronto documentato con costo e compatibilita UE 5.8.3.",
+        "Scelta di due effetti prioritari e fallback scalabile, senza simulare volumetricamente tutto l oceano.",
+        "Decisione e budget registrati prima della produzione."
+      ],
+      "verification": "Scenario ripetibile con valori registrati, confronto di stato host/client e profiling sulla macchina di riferimento.",
+      "assets": "Content/AFlagOfYourOwn/Ships/, Environment/, Data/ e Config/; dichiarare mappe e asset binari prima dell editing.",
+      "area": "simulation",
+      "needs_refinement": true,
+      "issue_number": 95,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/95"
+    },
+    {
+      "key": "local_water_effects",
+      "milestone": "M6",
+      "title": "Scia, schiuma e spruzzi locali delle navi",
+      "estimate_oa": 8,
+      "estimate_range_oa": [
+        4.0,
+        16
+      ],
+      "confidence": "bassa",
+      "human_hours": 0.5,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "local_water_spike"
+      ],
+      "scope": "Produrre i dettagli locali scelti nello spike, coerenti con movimento e livello di qualita low poly.",
+      "acceptance": [
+        "Eventi seguono velocita/onde e non alterano in modo divergente la fisica autorevole.",
+        "Livelli di qualita e limiti di distanza rispettano il budget.",
+        "Due navi vicine e quattro client verificati in render reale."
+      ],
+      "verification": "Scenario ripetibile con valori registrati, confronto di stato host/client e profiling sulla macchina di riferimento.",
+      "assets": "Content/AFlagOfYourOwn/Ships/, Environment/, Data/ e Config/; dichiarare mappe e asset binari prima dell editing.",
+      "area": "simulation",
+      "needs_refinement": true,
+      "issue_number": 96,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/96"
+    },
+    {
+      "key": "ocean_polish",
+      "milestone": "M6",
+      "title": "Rifinire il mare e il collegamento fisico con gli scafi",
+      "estimate_oa": 8,
+      "estimate_range_oa": [
+        4.0,
+        16
+      ],
+      "confidence": "bassa",
+      "human_hours": 0.5,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "content_budget"
+      ],
+      "scope": "Rifinire scala, variazione delle onde, resa low poly e interrogazioni fisiche sui tipi navali previsti.",
+      "acceptance": [
+        "Calmo, mosso e forte leggibili e coerenti con lo stato fisico.",
+        "Transizioni e vista da ponte/costa/sottobordo senza artefatti bloccanti.",
+        "Confronto con i target percettivi e di prestazioni; nessuna superiorita ai riferimenti dichiarata senza evidenza."
+      ],
+      "verification": "Scenario ripetibile con valori registrati, confronto di stato host/client e profiling sulla macchina di riferimento.",
+      "assets": "Content/AFlagOfYourOwn/Ships/, Environment/, Data/ e Config/; dichiarare mappe e asset binari prima dell editing.",
+      "area": "simulation",
+      "needs_refinement": true,
+      "issue_number": 97,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/97"
+    },
+    {
+      "key": "weather_states",
+      "milestone": "M6",
+      "title": "Vento e stati di mare evolutivi per i viaggi",
+      "estimate_oa": 8,
+      "estimate_range_oa": [
+        4.0,
+        16
+      ],
+      "confidence": "bassa",
+      "human_hours": 0.5,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "ocean_polish"
+      ],
+      "scope": "Estendere il vento e le transizioni di mare al catalogo di viaggi e alla flotta, mantenendo separati mare lungo e vento locale.",
+      "acceptance": [
+        "Raffiche e variazioni hanno anticipazioni leggibili e conseguenze coerenti sulle vele.",
+        "Host/client e spedizioni delegate usano lo stesso stato di gameplay.",
+        "Parametri di severita e durata regolabili e verificati sul percorso di regressione."
+      ],
+      "verification": "Scenario ripetibile con valori registrati, confronto di stato host/client e profiling sulla macchina di riferimento.",
+      "assets": "Content/AFlagOfYourOwn/Ships/, Environment/, Data/ e Config/; dichiarare mappe e asset binari prima dell editing.",
+      "area": "simulation",
+      "needs_refinement": true,
+      "issue_number": 98,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/98"
+    },
+    {
+      "key": "audio_final",
+      "milestone": "M6",
+      "title": "Completare audio di ruoli, navi e villa",
+      "estimate_oa": 4,
+      "estimate_range_oa": [
+        2.0,
+        8
+      ],
+      "confidence": "bassa",
+      "human_hours": 0.5,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "content_budget"
+      ],
+      "scope": "Completare gli eventi sonori del perimetro approvato con mix e provenienza tracciata.",
+      "acceptance": [
+        "Copertura della matrice contenuti e eventi di rete senza duplicazioni.",
+        "Volumi regolabili e segnali visivi equivalenti per le informazioni essenziali.",
+        "Licenze e budget runtime verificati in build."
+      ],
+      "verification": "Ascolto di eventi locali/remoti con volume regolabile, controllo origine/licenze e prova in build.",
+      "assets": "Content/AFlagOfYourOwn/Audio/; origine/licenza di ogni risorsa registrata.",
+      "area": "audio",
+      "needs_refinement": true,
+      "issue_number": 99,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/99"
+    },
+    {
+      "key": "ux_accessibility",
+      "milestone": "M6",
+      "title": "Rifinire comandi, leggibilita e comfort di camera",
+      "estimate_oa": 4,
+      "estimate_range_oa": [
+        2.0,
+        8
+      ],
+      "confidence": "bassa",
+      "human_hours": 1,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "content_budget"
+      ],
+      "scope": "Verificare rimappatura, sensibilita, testo, segnali e comfort su mare mosso nel perimetro PC.",
+      "acceptance": [
+        "Comandi essenziali configurabili e istruzioni aggiornate.",
+        "Informazioni critiche leggibili senza dipendere solo da colore o audio.",
+        "Opzioni di camera e input dei minigiochi verificate con giocatori diversi."
+      ],
+      "verification": "Compilare Blueprint interessati, provare casi normali/errore in Play e in cooperativa, allegare evidenze e verificare Repository checks.",
+      "assets": "Content/AFlagOfYourOwn/UI/ e Data/; riservare i Widget Blueprint interessati.",
+      "area": "ui",
+      "needs_refinement": true,
+      "issue_number": 100,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/100"
+    },
+    {
+      "key": "data_migration",
+      "milestone": "M6",
+      "title": "Migrazione e recupero dei salvataggi della 1.0",
+      "estimate_oa": 4,
+      "estimate_range_oa": [
+        2.0,
+        8
+      ],
+      "confidence": "bassa",
+      "human_hours": 0,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "content_budget"
+      ],
+      "scope": "Consolidare versione dati, backup e recupero per mondo, flotta, residenza e carriere.",
+      "acceptance": [
+        "Migrazioni previste provate su fixture versionate senza dati personali.",
+        "Scrittura interrotta, backup e dati corrotti hanno procedura documentata.",
+        "Nessuna perdita silenziosa o duplicazione di patrimonio/XP nel percorso di regressione."
+      ],
+      "verification": "Nuovo profilo, salvataggio, riavvio, riconnessione, dati assenti/corrotti e ricompensa ripetuta: verificare stato coerente e nessun duplicato.",
+      "assets": "Content/AFlagOfYourOwn/Blueprints/, Data/; dati runtime solo in Saved/ ignorato.",
+      "area": "save",
+      "needs_refinement": true,
+      "issue_number": 101,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/101"
+    },
+    {
+      "key": "onboarding_full",
+      "milestone": "M6",
+      "title": "Guidare la carriera dal primo imbarco alla villa",
+      "estimate_oa": 4,
+      "estimate_range_oa": [
+        2.0,
+        8
+      ],
+      "confidence": "bassa",
+      "human_hours": 1,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "content_budget"
+      ],
+      "scope": "Estendere introduzione e aiuti alle responsabilita di comando, delega e vita sull isola.",
+      "acceptance": [
+        "Nuovo giocatore comprende il prossimo obiettivo e i requisiti del ruolo.",
+        "Amico esperto e novizio possono usare gli aiuti indipendentemente.",
+        "Test della comprensione in build senza spiegazioni costanti del facilitatore."
+      ],
+      "verification": "Compilare Blueprint interessati, provare casi normali/errore in Play e in cooperativa, allegare evidenze e verificare Repository checks.",
+      "assets": "Content/AFlagOfYourOwn/UI/ e Data/; riservare i Widget Blueprint interessati.",
+      "area": "ui",
+      "needs_refinement": true,
+      "issue_number": 102,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/102"
+    },
+    {
+      "key": "net_regression",
+      "milestone": "M6",
+      "title": "Regressione cooperativa completa del perimetro 1.0",
+      "estimate_oa": 8,
+      "estimate_range_oa": [
+        4.0,
+        16
+      ],
+      "confidence": "bassa",
+      "human_hours": 2,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "weather_states",
+        "audio_final",
+        "ux_accessibility",
+        "data_migration",
+        "onboarding_full",
+        "local_water_effects"
+      ],
+      "scope": "Ripetere i percorsi di carriera, comando, flotta e villa con due/quattro utenti e disturbi di rete.",
+      "acceptance": [
+        "Almeno due PC, ingresso tardivo, riconnessioni e perdita host verificati.",
+        "Ruoli, acquisti, XP, carichi e spedizioni mantengono un solo stato autorevole.",
+        "Difetti registrati e P0/P1 bloccanti collegati al gate release."
+      ],
+      "verification": "Prova host/client con 2 e 4 processi, almeno 2 PC per il gate; ritardo di rete e disconnessione secondo Docs/PlaytestPlan.md.",
+      "assets": "Content/AFlagOfYourOwn/Blueprints/, Characters/, UI/ e Config/; eventuale modulo C++ solo dopo lo spike architetturale.",
+      "area": "network",
+      "needs_refinement": true,
+      "issue_number": 103,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/103"
+    },
+    {
+      "key": "perf_scaling",
+      "milestone": "M6",
+      "title": "Prestazioni con quattro giocatori e venti NPC",
+      "estimate_oa": 8,
+      "estimate_range_oa": [
+        4.0,
+        16
+      ],
+      "confidence": "bassa",
+      "human_hours": 1,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "net_regression"
+      ],
+      "scope": "Validare scene limite concordate: nave maggiore con venti NPC e quattro giocatori, mare mosso e flotta nel limite approvato.",
+      "acceptance": [
+        "CPU, GPU, memoria, frame time e rete misurati sulla baseline.",
+        "Qualita scalabile e comportamento offscreen rispettano i limiti di flotta definiti.",
+        "Scostamenti dal target richiedono correzioni tracciate o decisione documentata, non abbassamento implicito dei criteri."
+      ],
+      "verification": "Eseguire i comandi documentati, verificare exit code, versione/commit e risultati su installazione pulita.",
+      "assets": "Tools/, Config/ e Docs/Playtests/; output di build e log esclusi da Git.",
+      "area": "tooling",
+      "needs_refinement": true,
+      "issue_number": 104,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/104"
+    },
+    {
+      "key": "licences_audit",
+      "milestone": "M6",
+      "title": "Audit di asset, dipendenze e contenuti distribuiti",
+      "estimate_oa": 2,
+      "estimate_range_oa": [
+        1.0,
+        4
+      ],
+      "confidence": "bassa",
+      "human_hours": 0.5,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "audio_final",
+        "local_water_effects"
+      ],
+      "scope": "Confrontare build e repository con registri di origine/licenza e dipendenze scelte.",
+      "acceptance": [
+        "Ogni risorsa di terzi ha origine e condizioni di uso/redistribuzione registrate.",
+        "Nessuna credenziale, dato personale o file di sviluppo non necessario nel pacchetto.",
+        "Eventuali servizi esterni e relativi requisiti dichiarati nella documentazione."
+      ],
+      "verification": "Eseguire i comandi documentati, verificare exit code, versione/commit e risultati su installazione pulita.",
+      "assets": "Tools/, Config/ e Docs/Playtests/; output di build e log esclusi da Git.",
+      "area": "tooling",
+      "needs_refinement": true,
+      "issue_number": 105,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/105"
+    },
+    {
+      "key": "end_to_end_playtest",
+      "milestone": "M6",
+      "title": "Beta osservata dal mozzo/cuoco alla flotta e villa",
+      "estimate_oa": 2,
+      "estimate_range_oa": [
+        1.0,
+        4
+      ],
+      "confidence": "bassa",
+      "human_hours": 16,
+      "kind": "gate",
+      "needs_product_decision": false,
+      "depends_on": [
+        "perf_scaling"
+      ],
+      "scope": "Raccogliere evidenze umane dell intero arco e della sua crescita, distinguendo test accelerati da valutazione della durata naturale.",
+      "acceptance": [
+        "Gruppi cooperativi e partecipanti reali con osservazioni e risposte individuali anonimizzate.",
+        "Novizi, esperti e cambi di ruolo/nave inclusi; valutare utilita, ripetitivita e desiderio di proseguire.",
+        "Problemi e ipotesi di bilanciamento prioritizzati; nessun giudizio di divertimento inventato."
+      ],
+      "verification": "Revisione di specifica, esempi, esclusioni e decisioni; approvazione del responsabile per le ipotesi di prodotto.",
+      "assets": "Docs/ e dati di specifica; nessun asset da modificare prima della decisione.",
+      "area": "design",
+      "needs_refinement": true,
+      "issue_number": 106,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/106"
+    },
+    {
+      "key": "release_triage",
+      "milestone": "M6",
+      "title": "Triage beta e piano delle correzioni bloccanti",
+      "estimate_oa": 2,
+      "estimate_range_oa": [
+        1.0,
+        4
+      ],
+      "confidence": "bassa",
+      "human_hours": 0.5,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "end_to_end_playtest",
+        "licences_audit"
+      ],
+      "scope": "Trasformare i difetti scoperti in issue specifiche e legarle al gate finale; il costo delle correzioni ignote resta da stimare.",
+      "acceptance": [
+        "Ogni P0/P1 ha responsabile, riproduzione, accettazione, OA/OH e verifica di regressione.",
+        "Nuove dipendenze del gate release aggiunte prima di considerare il lavoro pronto.",
+        "Problemi rinviati con motivazione esplicita; nessun ticket ombrello chiuso come se tutte le correzioni fossero svolte."
+      ],
+      "verification": "Revisione di specifica, esempi, esclusioni e decisioni; approvazione del responsabile per le ipotesi di prodotto.",
+      "assets": "Docs/ e dati di specifica; nessun asset da modificare prima della decisione.",
+      "area": "design",
+      "needs_refinement": true,
+      "issue_number": 107,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/107"
+    },
+    {
+      "key": "release_gate",
+      "milestone": "M6",
+      "title": "Gate release: perimetro completo e qualita verificata",
+      "estimate_oa": 2,
+      "estimate_range_oa": [
+        1.0,
+        4
+      ],
+      "confidence": "bassa",
+      "human_hours": 1,
+      "kind": "gate",
+      "needs_product_decision": true,
+      "depends_on": [
+        "release_triage"
+      ],
+      "scope": "Approvare il candidato 1.0 solo dopo tutte le verifiche e le correzioni scoperte, sul perimetro concordato.",
+      "acceptance": [
+        "Requisiti confermati coperti da evidenze; zero P0/P1 aperti nei percorsi di rilascio.",
+        "Beta, prestazioni, salvataggi, licenze e documentazione accettati dal responsabile.",
+        "Decisione di distribuzione e problemi noti espliciti; tutte le nuove issue bloccanti chiuse."
+      ],
+      "verification": "Revisione di specifica, esempi, esclusioni e decisioni; approvazione del responsabile per le ipotesi di prodotto.",
+      "assets": "Docs/ e dati di specifica; nessun asset da modificare prima della decisione.",
+      "area": "design",
+      "needs_refinement": true,
+      "issue_number": 108,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/108"
+    },
+    {
+      "key": "release_package",
+      "milestone": "M6",
+      "title": "Preparare candidato 1.0, note e pacchetto di distribuzione",
+      "estimate_oa": 4,
+      "estimate_range_oa": [
+        2.0,
+        8
+      ],
+      "confidence": "bassa",
+      "human_hours": 0.5,
+      "kind": "task",
+      "needs_product_decision": false,
+      "depends_on": [
+        "release_gate"
+      ],
+      "scope": "Preparare build Windows verificata, tag/versione, note, requisiti e istruzioni per la destinazione concordata.",
+      "acceptance": [
+        "Build pulita riproducibile con commit e versione; installazione/avvio esterni verificati.",
+        "Note e problemi noti coerenti con il gate e i registri di licenza.",
+        "Pubblicazione su store o altre piattaforme soltanto con destinazione e autorizzazione specifiche; il pacchetto locale non e una pubblicazione."
+      ],
+      "verification": "Eseguire i comandi documentati, verificare exit code, versione/commit e risultati su installazione pulita.",
+      "assets": "Tools/, Config/ e Docs/Playtests/; output di build e log esclusi da Git.",
+      "area": "tooling",
+      "needs_refinement": true,
+      "issue_number": 109,
+      "url": "https://github.com/CourteousWinter/A-Flag-of-Your-Own/issues/109"
+    }
+  ],
+  "requirements": [
+    {
+      "requirement": "Cooperativa fino a quattro persone",
+      "tasks": [
+        "net_session",
+        "deck_network",
+        "demo_network_qa",
+        "net_regression"
+      ]
+    },
+    {
+      "requirement": "Terza persona",
+      "tasks": [
+        "third_person",
+        "deck_network",
+        "ux_accessibility"
+      ]
+    },
+    {
+      "requirement": "Grafica low poly",
+      "tasks": [
+        "art_bible",
+        "boat_blockout",
+        "medium_hull",
+        "large_hull",
+        "island_scene"
+      ]
+    },
+    {
+      "requirement": "Mare simulato e vento realistico",
+      "tasks": [
+        "ocean_spike",
+        "wind_field",
+        "ocean_surface",
+        "buoyancy",
+        "sailing_forces",
+        "ocean_polish",
+        "weather_states"
+      ]
+    },
+    {
+      "requirement": "Attivita operative come minigiochi, inclusi pulizia, cucina e stiva",
+      "tasks": [
+        "minigame_core",
+        "cleaning",
+        "cooking",
+        "stow",
+        "minigame_sails",
+        "minigame_anchor",
+        "minigame_repair",
+        "minigame_pumps",
+        "minigame_navigation",
+        "minigame_lookout",
+        "home_interactions"
+      ]
+    },
+    {
+      "requirement": "Esperienza personale e ruolo scelto a ogni imbarco; cinque ruoli",
+      "tasks": [
+        "demo_role",
+        "reward",
+        "save",
+        "career_design",
+        "character_profile",
+        "role_unlocks",
+        "embark_ui"
+      ]
+    },
+    {
+      "requirement": "Massimo venti NPC sulla nave maggiore",
+      "tasks": [
+        "npc_roles",
+        "npc_movement",
+        "captain_commands",
+        "perf_scaling"
+      ]
+    },
+    {
+      "requirement": "Capitano e nave propria",
+      "tasks": [
+        "ownership_design",
+        "ship_catalog",
+        "ship_purchase",
+        "captain_gate"
+      ]
+    },
+    {
+      "requirement": "Flotta e villa sull isola",
+      "tasks": [
+        "fleet_design",
+        "fleet_registry",
+        "expedition_sim",
+        "fleet_gate",
+        "estate_design",
+        "villa_shell",
+        "villa_fleet_desk",
+        "estate_gate"
+      ]
+    },
+    {
+      "requirement": "Demo provabile e decisione sul divertimento",
+      "tasks": [
+        "build_demo",
+        "playtest_demo",
+        "demo_decision"
+      ]
+    },
+    {
+      "requirement": "Release integrata e verificata",
+      "tasks": [
+        "content_budget",
+        "end_to_end_playtest",
+        "release_triage",
+        "release_gate",
+        "release_package"
+      ]
+    }
+  ]
+}

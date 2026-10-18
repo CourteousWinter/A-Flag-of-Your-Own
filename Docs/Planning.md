@@ -48,3 +48,5 @@ Dopo almeno cinque issue simili completate confrontare stima iniziale ed effetti
 ## Prossima milestone
 
 La prima milestone resta il breve ciclo da mozzo descritto in [Vision](Vision.md): movimento, incarico, completamento, paga/reputazione e salvataggio. Le decisioni ancora aperte vanno risolte o isolate prima di stimare le relative implementazioni. Questo setup prepara le issue future; non costituisce una stima dell'intero gioco.
+
+La [roadmap iniziale](Roadmap.md) collega la milestone MVP alle issue GitHub e alle fasi successive ancora da affinare. La terza persona per il primo prototipo è stata confermata dall'utente il 18 ottobre 2026.

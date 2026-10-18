@@ -22,9 +22,13 @@ These stages describe the intended fantasy. Their order, unlock conditions, and 
 
 Work and live aboard a ship, build skills and relationships, complete voyages, earn money and reputation, and invest in greater independence. Each investment should introduce meaningful choices and new responsibilities.
 
+## Confirmed decisions
+
+- The first prototype uses a **third-person camera**, confirmed by the user on 18 October 2026. Movement details and camera tuning still need implementation and playtesting.
+
 ## Decisions still open
 
-- Player perspective and camera.
+- Camera tuning, movement details, and interaction controls.
 - Historical setting, fictional setting, and degree of fantasy.
 - Single-player and any multiplayer ambitions.
 - Balance between simulation, exploration, trade, and combat.
@@ -33,3 +37,5 @@ Work and live aboard a ship, build skills and relationships, complete voyages, e
 ## First playable target
 
 Prove a short deckhand experience on one stationary ship: move around, accept a chore, finish it, receive pay and reputation, and save that progress. Expand to sailing and ownership after that loop is enjoyable.
+
+See [the initial roadmap](Roadmap.md) for the MVP milestone, estimated issues, proposed later increments and decisions awaiting the full game description.

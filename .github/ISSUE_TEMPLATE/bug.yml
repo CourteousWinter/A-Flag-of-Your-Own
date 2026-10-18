@@ -1,0 +1,49 @@
+name: Bug
+description: Un difetto riproducibile con versione e risultato atteso.
+title: "[Bug] "
+labels: ["bug", "status:triage", "effort:unestimated"]
+body:
+  - type: input
+    id: version
+    attributes:
+      label: Versione e ambiente
+      description: Commit/build, versione Unreal, Windows e hardware se pertinente.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Passi per riprodurre
+      description: Partire da una mappa o da uno stato di salvataggio noto; indicare la frequenza.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Risultato atteso e osservato
+      description: Includere impatto sul giocatore e criteri per considerare corretto il bug.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidenze
+      description: Log pertinenti, screenshot o video; rimuovere dati personali e credenziali.
+  - type: dropdown
+    id: effort
+    attributes:
+      label: Stima (OA)
+      description: Può restare da stimare durante il triage; prima di ready serve una stima valida.
+      options: ["Da stimare", "0.5 OA", "1 OA", "2 OA", "4 OA", "8 OA", "Da dividere (>8 OA)"]
+    validations:
+      required: true
+  - type: textarea
+    id: planning
+    attributes:
+      label: Piano di verifica, confidenza e dipendenze
+      description: Il responsabile aggiunge ripartizione OA, intervallo, OH previste e asset prima di ready; includere una prova di regressione pertinente.
+  - type: textarea
+    id: delivery
+    attributes:
+      label: Consuntivo e consegna
+      description: Alla chiusura aggiungere PR, OA/OH effettive misurate ed esito della regressione.

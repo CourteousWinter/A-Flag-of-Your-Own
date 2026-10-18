@@ -36,3 +36,5 @@ Tools/Editor/                Explicitly run editor utilities
 ```
 
 Read [the game vision](Docs/Vision.md) for the concept and [development notes](Docs/Development.md) for asset conventions and the proposed first playable milestone.
+
+Development follows [the contribution guide](CONTRIBUTING.md). Issues are sized in **OA (agent-hours)**: 1 OA is one hour of active agent effort, including implementation and verification. See [planning and estimation](Docs/Planning.md) for issue sizes, uncertainty, human playtesting and actual effort tracking.

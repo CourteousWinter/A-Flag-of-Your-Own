@@ -1,0 +1,39 @@
+name: Ricerca a tempo limitato
+description: Ridurre un'incertezza prima di stimare l'implementazione.
+title: "[Spike] "
+labels: ["type:spike", "status:triage", "effort:unestimated"]
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Domanda e confini
+      description: Una decisione o un dubbio tecnico; indicare ciò che non sarà implementato.
+    validations:
+      required: true
+  - type: dropdown
+    id: effort
+    attributes:
+      label: Stima (OA)
+      description: Limite di lavoro attivo; alla scadenza riportare il risultato anche se inconclusivo.
+      options: ["1 OA", "2 OA"]
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: Risultato atteso e verifica
+      description: Prova minima, alternative confrontate, rischi, raccomandazione e stima delle issue successive.
+    validations:
+      required: true
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Confidenza, OH e dipendenze
+      description: Agente di riferimento, verifiche/decisioni umane, strumenti e asset necessari.
+    validations:
+      required: true
+  - type: textarea
+    id: delivery
+    attributes:
+      label: Consuntivo e consegna
+      description: Risultato, evidenze, OA/OH misurate e nuove issue stimate.

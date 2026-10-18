@@ -38,3 +38,21 @@ To recreate a missing map on Windows, run this from the repository root in Power
 - [ ] Playtest the full chore loop in the packaged Windows build.
 
 The initial flying pawn is a layout inspection tool. No movement, interaction, progression, or saving system should be marked complete based on this scaffold.
+
+## Repeatable Unreal smoke test
+
+Run from the repository root with Python 3. It launches a separate Unreal 5.8.3 commandlet with NullRHI, reads project assets and configured maps, and checks that the gameplay map has a PlayerStart and assigned static mesh geometry. It never saves or creates content assets.
+
+```shell
+python Tools/Editor/run_smoke_test.py
+```
+
+For another installation path, pass `--engine-dir "D:/Epic Games/UE_5.8"` or set `UE_ENGINE_DIR`. `--timeout` limits engine runtime in seconds (default 600). Each run writes `result.json`, `engine.log` and `console.log` into a new `Saved/SmokeTests/<run-id>/` directory, ignored by Git. The JSON records engine version, loaded maps, asset counts, PlayerStarts and errors. A nonzero exit, missing report, mismatched run/project or failed check makes the wrapper fail; an old success report cannot satisfy a new run.
+
+To check the failure path deliberately, this command must return exit code 1 with a missing-map error in its report:
+
+```shell
+python Tools/Editor/run_smoke_test.py --map /Game/AFlagOfYourOwn/Maps/L_DoesNotExist
+```
+
+This is a loadability check. It does not validate Blueprint compilation, camera controls, Play, rendering, fun or packaging. Those checks remain required on the relevant gameplay issues and the Windows MVP milestone. Hosted CI tests the report handling; the full engine check requires the local Unreal installation.

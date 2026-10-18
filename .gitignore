@@ -1,0 +1,31 @@
+# Generated Unreal Engine files
+Binaries/
+DerivedDataCache/
+Intermediate/
+Saved/
+Build/
+Plugins/**/Binaries/
+Plugins/**/Intermediate/
+Plugins/**/Saved/
+
+# IDE and local workspace files
+.vs/
+.idea/
+.vscode/
+*.sln
+*.suo
+*.sdf
+*.opensdf
+*.VC.db
+*.VC.opendb
+*.code-workspace
+.DS_Store
+Thumbs.db
+
+# Local secrets and editor caches
+.env
+.env.*
+!.env.example
+__pycache__/
+*.pyc
+.Aura/
